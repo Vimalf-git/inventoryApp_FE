@@ -1,0 +1,10 @@
+ {/* <input type="password" className="form-control box-size"
+                        id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                    <label htmlFor="floatingPassword">Password</label> */}
+
+                    {/* <input type="email" className="form-control box-size"
+                        id="floatingInput" placeholder="name@example.com" onChange={(e) => setMail(e.target.value)} />
+                    <label htmlFor="floatingInput">Email address</label> */}
+
+                                        {/* <Link style={{ textDecoration: 'none' }} to='/createuser'>SignUp</Link> */}
+error={true} disabled={true}
