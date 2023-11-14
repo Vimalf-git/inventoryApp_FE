@@ -1,51 +1,128 @@
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import { toast } from 'react-toastify'
+import ApiService from '../../common/ApiService';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function Signup() {
-    const [email, setMail] = useState("")
-    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-
-    const toggleLogin=()=>{
-        console.log("inside fun");
+    const toggleLogin = () => {
         navigate('/login');
     }
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const submitData = async (value) => {
+        console.log("enter into FE");
+        try {
+            const res = await ApiService.post('/usercreate', value);
+            if (res.status === 201) {
+                toast.success('successfully account created')
+                navigate('/login')
+            }
+        } catch (error) {
+            if (error.response.data.status === 400) {
+                toast.error('User already exist')
+            } else {
+                toast.error(error.response.data.message);
+            }
+        }
+    }
+
+    const scheme = Yup.object().shape({
+        username: Yup.string().required('please enter your name').min(3, '* User Name should be atlest 3 characters'),
+        email: Yup.string().required('please enter your mail'),
+        contact: Yup.string().required().matches(/^\d{10}$/, 'please fill atleast 10 number'),
+        password: Yup.string().required('please enter your password')
+    })
     return (
         <>
             <div className='signupPage'>
-            <div className='designSignupPart'>
+                <div className='designSignupPart'>
                     <Typography variant='h5' component="p"
                         sx={{ color: "#ffff" }}>
                         Already Have an account?</Typography>
                     <Typography variant='h5' component="p"
                         sx={{ color: "#ffff" }}>
-                            please login...
+                        please login...
                     </Typography>
-                    <Button variant='contained' color='warning' onClick={() =>  toggleLogin() }>Sigh In</Button>
+                    <Button variant='contained' color='warning' onClick={() => toggleLogin()}>Sigh In</Button>
                 </div>
-                <form className='signupForm'>
-                    <div className="form-floating login-box mb-3">
-                        <TextField required id="outlined-basic" label="Email" variant="outlined"
-                            onChange={(e) => setMail(e.target.value)}
-                        />
-                    </div>
-                    <div className="form-floating  mb-3">
-                        <TextField required id="outlined-basic" label="Password" variant="outlined"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <div className='for-crt-link mb-3'>
-                        <Link style={{ textDecoration: 'none' }} to='/forget'>Forget password?</Link>
-                    </div>
-                    <div className="d-grid">
-                        <Button variant='contained' color='primary'
-                            onClick={(e) => loginVerify(e)}>
-                            Sign in
-                        </Button>
-                    </div>
-                </form>
-                
+                <div className='signupForm'>
+                    <Typography variant='h5' component="p"
+                        sx={{ color: "#4481eb" }}>
+                            Create Account
+                    </Typography>
+                    <Formik
+                        initialValues={{
+                            username: '',
+                            email: '',
+                            contact: '',
+                            password: ''
+                        }}
+                        onSubmit={(value) => {
+                            console.log("hi");
+                            submitData(value)
+                        }}
+                        validationSchema={scheme}
+                    >{({ handleSubmit, handleChange, handleBlur, errors, touched, values }) => (
+                        <  form onSubmit={handleSubmit} className='form-input' >
+                            <TextField sx={{ m: 1, width: '35ch' }}
+                                required id="outlined-basic" label="Name" variant="outlined"
+                                value={values.username} name='username' onChange={handleChange}
+                                onBlur={handleBlur} error={errors.username && touched.username}
+                                helperText={errors.username && touched.username ? errors.username : ""}
+                            />
+
+                            <TextField sx={{ m: 1, width: '35ch' }}
+                                required id="outlined-basic" label="Email" variant="outlined"
+                                value={values.email} name='email' onChange={handleChange}
+                                onBlur={handleBlur} error={errors.email && touched.email}
+                                helperText={errors.email && touched.email ? errors.email : ""} />
+
+                            <TextField sx={{ m: 1, width: '35ch' }}
+                                required id="outlined-basic" label="contactNo" variant="outlined"
+                                value={values.contact} name='contact' onChange={handleChange}
+                                onBlur={handleBlur} error={errors.contact && touched.contact}
+                                helperText={errors.contact && touched.contact ? errors.contact : ""} />
+
+                            <TextField sx={{ m: 1, width: '35ch' }}
+                                required id="outlined-basic" label="password" variant="outlined"
+                                value={values.password} name='password' onChange={handleChange}
+                                onBlur={handleBlur} error={errors.password && touched.password}
+                                helperText={errors.password && touched.password ? errors.password : ""}
+                                type={showPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment:
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                }}
+                            />
+                            <Button sx={{ m: 1, width: '35ch' }}
+
+                                variant='contained' color='primary' type='submit'  >
+                                Sign Up
+                            </Button>
+                        </ form>
+                    )}
+                    </Formik>
+                </div>
             </div>
         </>
     )

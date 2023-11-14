@@ -4,7 +4,7 @@ function UseLogout() {
     let navigate = useNavigate()
     return () => {
         sessionStorage.clear()
-        navigate('/')
+        navigate('/login')
     }
 }
 
