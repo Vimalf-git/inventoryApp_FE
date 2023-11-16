@@ -6,6 +6,7 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import CategoryIcon from '@mui/icons-material/Category';
 import ApiService from '../../common/ApiService';
 import { jwtDecode } from 'jwt-decode';
+import EnhancedTable from '../CustomHook/CustomTable';
 
 function Dashboard() {
   /* orange-FF9F43
@@ -75,8 +76,9 @@ useEffect(()=>{
         </div>
 
       </div>
-
-
+      <div className='dashBoardTable'>
+        <EnhancedTable/>
+      </div>
     </div>
   )
 }

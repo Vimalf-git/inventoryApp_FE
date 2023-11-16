@@ -5,6 +5,7 @@ import SideBar from "./components/SideBar/SideBar"
 import Dashboard from "./components/LandingPage/Dashboard"
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import Addproduct from "./components/AddProduct/Addproduct"
+import TableContext from "./components/CustomHook/TableDataContext"
 function App() {
 
   return (
@@ -16,10 +17,14 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard"
             element={
+
               <ProtectedRoute>
+                <TableContext>
                 <div className="dash">
                   <SideBar /><Dashboard />
                 </div>
+                </TableContext>
+                
               </ProtectedRoute>
             } />
             <Route path="/addproduct" element={

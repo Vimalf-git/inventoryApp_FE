@@ -2,11 +2,13 @@
     width: 80%;
     height: 100vh;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
     overflow-y: scroll;
     gap: 3rem;
+    /* background-color: blue; */
 }
 
 .addproTittle {
@@ -19,6 +21,14 @@
     align-items: center;
     /* gap: 1rem; */
     justify-content: space-between;
+    /* background-color: green; */
+}
+
+.addproTittleDesign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .addproDesign {
@@ -26,35 +36,46 @@
     height: 1.5rem;
     margin-left: 1rem;
     border-radius: .2rem;
-    /* background-color: black; */
-    background:#2a2185;
+    background: #2a2185;
 }
 
-.addproTittleDesign {
-    display: flex;
-    gap: 1rem;
+.addtittleBtn {
+    color: #ffff !important;
+    background-color: #2a2185 !important;
+    width: 10rem !important;
+    height: 1.8rem !important;
+    margin-right: 1rem !important;
+    display: flex !important;
+    justify-content: space-around !important;
 }
 
 .addproFormik {
     width: 100%;
     display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
 .addproForm {
-    width: 100%;
+    width: 90%;
+    height: 20rem;
     /* height: 100vh; */
     /* height: auto; */
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
+    gap: 1rem;
+    justify-content: center;
     /* align-items: center; */
     /* background-color: black; */
+    /* background-color: brown; */
+
 }
 
 .addproForm-left {
-    width: 50%;
+    width: 26rem;
+    /* height: 20rem; */
     /* background-color: red; */
     display: flex;
     flex-wrap: wrap;
@@ -64,7 +85,9 @@
 }
 
 .addproForm-right {
-    width: 50%;
+    width: 26rem;
+    /* height: 20rem; */
+
     /* background-color: aqua; */
     /* height: auto; */
     display: flex;
@@ -72,4 +95,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+@media(max-width:320px) {
+    .addproForm-left {
+        /* background-color: aquamarine; */
+    }
+
+    .addproTittle {
+        height: 4.5rem;
+    }
+    .addtittleBtn{
+        height: 3rem !important;
+        margin-left: .3rem !important;
+        margin-right: .4rem !important;
+    }
 }

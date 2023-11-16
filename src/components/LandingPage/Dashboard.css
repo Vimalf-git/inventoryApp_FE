@@ -3,6 +3,8 @@
     height: 100vh;
     overflow-y: scroll;
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
     /* justify-content: center;
     align-items: center; */
 }
@@ -54,4 +56,10 @@ margin: 2rem 0 0 2rem;
     /* align-items:baseline; */
     /* background-color: blue; */
 }
-
+.dashBoardTable{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aqua; */
+}

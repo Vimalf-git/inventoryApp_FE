@@ -1,4 +1,4 @@
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './AddProduct.css'
@@ -64,9 +64,7 @@ function Addproduct() {
                         <div className='addproDesign'></div>
                         <span>Add Product</span>
                     </div>
-                    <Button style={{
-                        color: '#ffff', backgroundColor: "#2a2185",
-                        width: '10rem', height: '1.8rem', marginRight: '1rem', display: 'flex', justifyContent: 'space-around'
+                    <Button className='addtittleBtn' style={{
                     }}>
                         {<TodayIcon />} <div>{`${mon} ${day} ${year}`}</div>
                     </Button>
@@ -88,60 +86,66 @@ function Addproduct() {
                         <  form onSubmit={handleSubmit} className='addproForm' >
                             {console.log(errors)}
                             <div className='addproForm-left'>
-                                <FormControl required sx={{ m: 1, width: '35ch' }}
-                                    error={errors.category && touched.category}>
-                                    <InputLabel id="demo-simple-select-required-label"
-                                        error={errors.category && touched.category}
-                                    >Category</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-required-label"
-                                        id="demo-simple-select-required"
-                                        value={values.category}
-                                        name='category'
-                                        label="Category"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
+                                
+                                    <FormControl  required  sx={{m:1,width:'80%'}}
                                         error={errors.category && touched.category}>
-                                        <MenuItem value="">
-                                            none
-                                        </MenuItem>
-                                        {
-                                            categories.map((e) => {
-                                                return <MenuItem value={e}>
-                                                    {e}
-                                                </MenuItem>
-                                            })
-                                        }
-                                    </Select>
-                                    {errors.category && touched.category ?
-                                        <FormHelperText>{errors.category}</FormHelperText>
-                                        : ""}
-                                </FormControl>
-                                <TextField sx={{ m: 1, width: '35ch' }}
-                                    required id="outlined-basic" label="ProductName" variant="outlined"
-                                    value={values.username} name='ProductName' onChange={handleChange}
-                                    onBlur={handleBlur} error={errors.ProductName && touched.ProductName}
-                                    helperText={errors.ProductName && touched.ProductName ? errors.ProductName : ""}
-                                />
-                            </div>
+                                        <InputLabel id="demo-simple-select-required-label"
+                                            error={errors.category && touched.category}
+                                            
+                                        >Category</InputLabel>
+                                        <Select
+                                        // sx={{width:'12ch'}}
+                                            labelId="demo-simple-select-required-label"
+                                            id="demo-simple-select-required"
+                                            value={values.category}
+                                            name='category'
+                                            label="Category"
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            error={errors.category && touched.category}>
+                                            <MenuItem value="">
+                                                none
+                                            </MenuItem>
+                                            {
+                                                categories.map((e) => {
+                                                    return <MenuItem value={e}>
+                                                        {e}
+                                                    </MenuItem>
+                                                })
+                                            }
+                                        </Select>
+                                        {errors.category && touched.category ?
+                                            <FormHelperText>{errors.category}</FormHelperText>
+                                            : ""}
+                                    </FormControl>
+                                {/* <div> */}
+                                    <TextField sx={{ m: 1,width:'80%'}}
+                                        required id="outlined-basic" label="ProductName" variant="outlined"
+                                        value={values.username} name='ProductName' onChange={handleChange}
+                                        onBlur={handleBlur} error={errors.ProductName && touched.ProductName}
+                                        helperText={errors.ProductName && touched.ProductName ? errors.ProductName : ""}
+                                    />
+                                {/* </div>                          */}
+                                   </div>
                             <div className='addproForm-right'>
 
-                                <TextField sx={{ m: 1, width: '35ch' }}
+                                <TextField sx={{ m: 1,width:'80%' }}
                                     required id="outlined-basic" label="Price" variant="outlined"
                                     value={values.price} name='price' onChange={handleChange}
                                     onBlur={handleBlur} error={errors.price && touched.price}
                                     helperText={errors.price && touched.price ? errors.price : ""}
                                 />
 
-                                <TextField sx={{ m: 1, width: '35ch' }}
+                                <TextField sx={{ m: 1,width:'80%' }}
                                     required id="outlined-basic" label="Quantity" variant="outlined"
                                     value={values.quantity} name='quantity' onChange={handleChange}
                                     onBlur={handleBlur} error={errors.quantity && touched.quantity}
                                     helperText={errors.quantity && touched.quantity ? errors.quantity : ""}
                                 />
                             </div>
+
                             <div className='addproForm-left'>
-                                <Button sx={{ m: 1, width: '25ch', display: 'flex', gap: '1rem', bgcolor: "#2a2185" }}
+                                <Button sx={{ m: 1, display: 'flex', gap: '1rem', bgcolor: "#2a2185" }}
 
                                     variant='contained' color='primary' type='submit'  >
                                     <AddShoppingCartIcon />

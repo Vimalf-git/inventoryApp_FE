@@ -41,17 +41,24 @@
     transition: 500ms;
 
 }
-.signbtn:hover{
+a.active{
+    background-color: #FFFF;
     color: #2a2185 !important;
+    transition: 500ms;
 }
-.signbtn{
+.signbtn:hover {
+    color: red !important;
+}
+
+.signbtn {
     width: 97.3%;
     /* display: flex; */
     /* justify-content: flex-start; */
     margin-left: 0;
-    color: #FFFF !important;
+    color:red !important;
     /* background-color: aqua !important; */
 }
+
 .avatarSection {
     display: flex;
     /* justify-content: center; */
@@ -69,3 +76,16 @@
     background-color: red;
     right: 0;
 } */
+
+
+@media(max-width:450px) {
+    
+
+    .menuList {
+        position: relative;
+        left: -1.5rem;
+    }
+    .sidebarListName{
+        display: none;
+    }
+}
