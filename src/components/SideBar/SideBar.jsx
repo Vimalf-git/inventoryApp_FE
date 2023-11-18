@@ -15,7 +15,7 @@ import UseLogout from '../CustomHook/UseLogout'
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Stack from '@mui/material/Stack';
-
+import BarChartIcon from '@mui/icons-material/BarChart';
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
         backgroundColor: '#44b700',
@@ -55,13 +55,13 @@ function SideBar() {
             path: '/dashboard'
 
         }, {
-            listName: "Add Product",
+            listName: "AddProduct",
             logo: <PostAddIcon />,
             path: '/addproduct'
         }, {
-            listName: "Product",
-            logo: <BsFillArchiveFill />,
-            path: '/product'
+            listName: "Sales",
+            logo: <BarChartIcon />,
+            path: '/saleschart'
         }, {
             listName: "Category",
             logo: <BsFillGrid3X3GapFill />,
@@ -88,7 +88,7 @@ function SideBar() {
                 >
                     <Avatar sx={{ bgcolor: deepOrange[500] }} >{name.charAt(0) + name.charAt(1)}</Avatar>
                 </StyledBadge>
-                <span>{name}</span>
+                <span className='list-data-con'>{name}</span>
             </div>
             <div className='menuList'>
                 {menu.map((e, i) => {
@@ -102,9 +102,11 @@ function SideBar() {
                         :
                         <NavLink key={i} className='list-data' to={e.path}
                             style={{ color: '#FFFF', textDecoration: 'none'}}>
-                            <span className='list-data-con'
+                            <span 
                                 style={{ marginLeft: '1rem', }}>
-                                {e.logo}&nbsp; &nbsp;{e.listName}</span>
+                                {e.logo}&nbsp; &nbsp;
+                                <span className='list-data-con'>
+                                    {e.listName}</span></span>
                         </NavLink>
                 })
                 }

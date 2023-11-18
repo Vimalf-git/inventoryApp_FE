@@ -2,7 +2,7 @@
     width: 80%;
     height: 100vh;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
@@ -60,9 +60,9 @@
 
 .addproForm {
     width: 90%;
-    height: 20rem;
+    /* height: 20rem; */
     /* height: 100vh; */
-    /* height: auto; */
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -93,7 +93,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: flex-start; */
     align-items: center;
 }
 
@@ -103,11 +103,29 @@
     }
 
     .addproTittle {
-        height: 4.5rem;
+        height: 50rem !important;
     }
     .addtittleBtn{
-        height: 3rem !important;
+        height: 1.5rem !important;
         margin-left: .3rem !important;
         margin-right: .4rem !important;
+        font-size: 10px !important;
+    }
+    .addTittleTxt{
+        font-size: 10px;
     }
 }
+@media(max-width:800px) {
+    .addProduct {
+        /* width: 70%; */
+    }
+}
+/* @media(min-width:425px) {
+
+    .addProduct{
+        background-color: aqua;
+        width: 500px;
+        height: 100dvh;
+    }
+
+} */

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import ApiService from '../../common/ApiService';
 import TodayIcon from '@mui/icons-material/Today';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { jwtDecode } from 'jwt-decode';
 function Addproduct() {
     const [categories, setCategories] = useState([])
@@ -54,7 +55,8 @@ function Addproduct() {
         ProductName: Yup.string().required('please enter your name'),
         price: Yup.string().required("please enter price"),
         quantity: Yup.string().required('please enter your quantity'),
-        category: Yup.string().required('please select any one category').matches("", "please any one category")
+        category: Yup.string().required('please select any one category').matches("", "please any one category"),
+        ProductCode: Yup.string().required('please enter your ProductCode')
     })
     return (
         <>
@@ -62,7 +64,7 @@ function Addproduct() {
                 <div className='addproTittle'>
                     <div className='addproTittleDesign'>
                         <div className='addproDesign'></div>
-                        <span>Add Product</span>
+                        <span className='addTittleTxt'>Add Product</span>
                     </div>
                     <Button className='addtittleBtn' style={{
                     }}>
@@ -75,7 +77,8 @@ function Addproduct() {
                             ProductName: '',
                             price: '',
                             quantity: '',
-                            category: ''
+                            category: '',
+                            ProductCode:''
                         }}
                         onSubmit={(value) => {
                             console.log(value);
@@ -86,57 +89,65 @@ function Addproduct() {
                         <  form onSubmit={handleSubmit} className='addproForm' >
                             {console.log(errors)}
                             <div className='addproForm-left'>
-                                
-                                    <FormControl  required  sx={{m:1,width:'80%'}}
-                                        error={errors.category && touched.category}>
-                                        <InputLabel id="demo-simple-select-required-label"
-                                            error={errors.category && touched.category}
-                                            
-                                        >Category</InputLabel>
-                                        <Select
+
+                                <FormControl required sx={{ m: 1, width: '80%' }}
+                                    error={errors.category && touched.category}>
+                                    <InputLabel id="demo-simple-select-required-label"
+                                        error={errors.category && touched.category}
+
+                                    >Category</InputLabel>
+                                    <Select
                                         // sx={{width:'12ch'}}
-                                            labelId="demo-simple-select-required-label"
-                                            id="demo-simple-select-required"
-                                            value={values.category}
-                                            name='category'
-                                            label="Category"
-                                            onBlur={handleBlur}
-                                            onChange={handleChange}
-                                            error={errors.category && touched.category}>
-                                            <MenuItem value="">
-                                                none
-                                            </MenuItem>
-                                            {
-                                                categories.map((e) => {
-                                                    return <MenuItem value={e}>
-                                                        {e}
-                                                    </MenuItem>
-                                                })
-                                            }
-                                        </Select>
-                                        {errors.category && touched.category ?
-                                            <FormHelperText>{errors.category}</FormHelperText>
-                                            : ""}
-                                    </FormControl>
+                                        labelId="demo-simple-select-required-label"
+                                        id="demo-simple-select-required"
+                                        value={values.category}
+                                        name='category'
+                                        label="Category"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={errors.category && touched.category}>
+                                        <MenuItem value="">
+                                            none
+                                        </MenuItem>
+                                        {
+                                            categories.map((e) => {
+                                                return <MenuItem value={e}>
+                                                    {e}
+                                                </MenuItem>
+                                            })
+                                        }
+                                    </Select>
+                                    {errors.category && touched.category ?
+                                        <FormHelperText>{errors.category}</FormHelperText>
+                                        : ""}
+                                </FormControl>
                                 {/* <div> */}
-                                    <TextField sx={{ m: 1,width:'80%'}}
-                                        required id="outlined-basic" label="ProductName" variant="outlined"
-                                        value={values.username} name='ProductName' onChange={handleChange}
-                                        onBlur={handleBlur} error={errors.ProductName && touched.ProductName}
-                                        helperText={errors.ProductName && touched.ProductName ? errors.ProductName : ""}
-                                    />
+                                <TextField sx={{ m: 1, width: '80%' }}
+                                    required id="outlined-basic" label="ProductName" variant="outlined"
+                                    value={values.ProductName} name='ProductName' onChange={handleChange}
+                                    onBlur={handleBlur} error={errors.ProductName && touched.ProductName}
+                                    helperText={errors.ProductName && touched.ProductName ? errors.ProductName : ""}
+                                />
+                                <TextField sx={{ m: 1, width: '80%' }}
+                                    required id="outlined-basic" label="ProductCode" variant="outlined"
+                                    value={values.ProductCode} name='ProductCode' onChange={handleChange}
+                                    onBlur={handleBlur} error={errors.ProductCode && touched.ProductCode}
+                                    helperText={errors.ProductCode && touched.ProductCode ? errors.ProductCode : ""}
+                                />
                                 {/* </div>                          */}
-                                   </div>
+                                {/* <TextareaAutosize /> */}
+
+                            </div>
                             <div className='addproForm-right'>
 
-                                <TextField sx={{ m: 1,width:'80%' }}
+                                <TextField sx={{ m: 1, width: '80%' }}
                                     required id="outlined-basic" label="Price" variant="outlined"
                                     value={values.price} name='price' onChange={handleChange}
                                     onBlur={handleBlur} error={errors.price && touched.price}
                                     helperText={errors.price && touched.price ? errors.price : ""}
                                 />
 
-                                <TextField sx={{ m: 1,width:'80%' }}
+                                <TextField sx={{ m: 1, width: '80%' }}
                                     required id="outlined-basic" label="Quantity" variant="outlined"
                                     value={values.quantity} name='quantity' onChange={handleChange}
                                     onBlur={handleBlur} error={errors.quantity && touched.quantity}
@@ -149,7 +160,7 @@ function Addproduct() {
 
                                     variant='contained' color='primary' type='submit'  >
                                     <AddShoppingCartIcon />
-                                    Add Product
+                                    <span >Add Product</span>
                                 </Button>
                             </div>
                         </ form>

@@ -6,6 +6,7 @@ import Dashboard from "./components/LandingPage/Dashboard"
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import Addproduct from "./components/AddProduct/Addproduct"
 import TableContext from "./components/CustomHook/TableDataContext"
+import Sales from "./components/SalesChart/Sales"
 function App() {
 
   return (
@@ -20,20 +21,26 @@ function App() {
 
               <ProtectedRoute>
                 <TableContext>
-                <div className="dash">
-                  <SideBar /><Dashboard />
-                </div>
+                  <div className="dash">
+                    <SideBar /><Dashboard />
+                  </div>
                 </TableContext>
-                
+
               </ProtectedRoute>
             } />
-            <Route path="/addproduct" element={
-             <ProtectedRoute>
-             <div className="dash">
-               <SideBar /><Addproduct/>
-             </div>
-           </ProtectedRoute>
-            }/>
+          <Route path="/addproduct" element={
+            <ProtectedRoute>
+              <div className="dash">
+                <SideBar /><Addproduct />
+              </div>
+            </ProtectedRoute>
+          } />
+          <Route path="/saleschart" element={
+            <div className="dash">
+              <SideBar />
+              <Sales />
+            </div>
+          } />
         </Routes>
       </BrowserRouter>
     </>

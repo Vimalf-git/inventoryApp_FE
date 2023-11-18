@@ -1,0 +1,116 @@
+.salesChart{
+    width: 80%;
+    height: 100dvh;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    /* align-items: center; */
+    justify-content: center;
+    overflow-y: scroll;
+    /* gap: -10rem; */
+gap: 1rem;
+}
+.addproTittle {
+    margin-top: 2rem;
+    width: 90%;
+    height: 2.5rem;
+    border-radius: .3rem;
+    background-color: #d2e3f3;
+    display: flex;
+    align-items: center;
+    /* gap: 1rem; */
+    justify-content: space-between;
+    /* background-color: green; */
+}
+
+.addproTittleDesign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.addproDesign {
+    width: .5rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+    border-radius: .2rem;
+    background: #2a2185;
+}
+
+.TopChart{
+    width: 90%;
+    height: auto;
+    /* background-color: aqua; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* align-items: center; */
+    /* margin-top: -7rem; */
+}
+.bottomChart{
+    width: 90%;
+    height: auto;
+    /* background-color: aqua; */
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: flex-start !important; */
+    align-items: flex-start;
+}
+.productChart{
+    width: 28.3rem;
+    height: 23rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+    /* background-color: red !important; */
+
+}
+.yearChart{
+    width: 28.3rem;
+    height: 23rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+    /* background-color: yellow !important; */
+}
+/* .productChart{
+    width: 50%;
+    height: 18rem;
+    background-color: red !important;
+    display: flex;
+    align-items: center;
+
+
+    flex-wrap: wrap;
+}
+*/
+/*
+.yearChart{
+    width: 50%;
+    height: 18rem;
+    background-color:greenyellow !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+@media(max-width:320px) {
+    .salesChart{
+        width: 80%;
+}
+    .addproTittle {
+        height: 2rem !important;
+    }
+    /* .addtittleBtn{
+        height: 0rem !important;
+        margin-left: .3rem !important;
+        margin-right: .4rem !important;
+        font-size: 10px !important;
+    }
+    .addTittleTxt{
+        font-size: 10px;
+    } */
+}

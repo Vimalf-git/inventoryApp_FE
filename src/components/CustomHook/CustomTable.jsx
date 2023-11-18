@@ -22,7 +22,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { tableProductData } from './TableDataContext';
-
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import ApiService from '../../common/ApiService';
 function createData(id, name, calories, fat, carbs, protein) {
   return {
     id,
@@ -104,16 +105,16 @@ const headCells = [
     label: 'ProductName',
   },
   {
-    id: 'Category',
-    numeric: false,
-    disablePadding: true,
-    label: 'Category',
-  },
-  {
-    id: 'Description',
+    id: 'ProductCode',
     numeric: false,
     disablePadding: false,
-    label: 'Description',
+    label: 'ProductCode',
+  },
+  {
+    id: 'Category',
+    numeric: false,
+    disablePadding: false,
+    label: 'Category',
   },
   {
     id: 'Quantity',
@@ -124,7 +125,7 @@ const headCells = [
   {
     id: 'Price',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Price',
   }
 ];
@@ -187,7 +188,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-
+const{isFilter, setIsfilter}=React.useContext(tableProductData);
   return (
     <Toolbar
       sx={{
@@ -220,32 +221,32 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete" onClick={()=>{removeProduct()}}>
+        <Tooltip title="Delete" onClick={(id)=>{console.log(id +""+"ji");}}>
           <IconButton>
             <DeleteIcon />
           </IconButton>
           
         </Tooltip>
       ) : ( 
-        <Tooltip title="Filter list">
+        <Tooltip title="Filter list" onClick={()=>setIsfilter(pre=>!pre)}>
           <IconButton>
-            <FilterListIcon />
+            <FilterAltIcon  />
           </IconButton>
         </Tooltip>
       )}
     </Toolbar>
   );
 }
-const removeProduct=()=>{
-    console.log("enter remove");
-}
+
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
 export default function EnhancedTable() {
+
   const {rows=[]}=React.useContext(tableProductData);
-  console.log(rows);
+  // console.log('table');
+  // console.log(rows);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -261,15 +262,19 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = rows.map((n) => n.checkboxId);//change
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, id) => {
+  const handleClick = (event, id) => { 
+    
+    console.log(id);
+
     const selectedIndex = selected.indexOf(id);
+    console.log(selected);
     let newSelected = [];
 
     if (selectedIndex === -1) {
@@ -306,14 +311,14 @@ export default function EnhancedTable() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage,
-      ),
-    [order, orderBy, page, rowsPerPage],
-  );
+  // const visibleRows = React.useMemo(
+  //   () =>
+  //     stableSort(rows, getComparator(order, orderBy)).slice(
+  //       page * rowsPerPage,
+  //       page * rowsPerPage + rowsPerPage,
+  //     ),
+  //   [order, orderBy, page, rowsPerPage],
+  // );
   // React.useEffect(()=>{
   //   getProduct()
   // },[])
@@ -335,20 +340,20 @@ export default function EnhancedTable() {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
-           { visibleRows}
+           {/* { visibleRows} */}
             <TableBody>
               {rows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
+                // console.log(row.checkboxId);
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
+                    onClick={(event) => handleClick(event, row.checkboxId)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={row.checkboxId}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
@@ -357,7 +362,7 @@ export default function EnhancedTable() {
                         color="primary"
                         checked={isItemSelected}
                         inputProps={{
-                          'aria-labelledby': labelId,
+                          index
                         }}
                       />
                     </TableCell>
@@ -367,12 +372,12 @@ export default function EnhancedTable() {
                       scope="row"
                       padding="none"
                     >
-                      {row.name}
+                      {row.productName}
                     </TableCell>
-                    <TableCell align="left">{row.category}</TableCell>
-                    <TableCell align="left">{"kjnb"}</TableCell>
-                    <TableCell align="center">{row.productName}</TableCell>
+                    <TableCell >{row.ProductCode}</TableCell>
+                    <TableCell >{row.category}</TableCell>
                     <TableCell align="left">{row.quantity}</TableCell>
+                    <TableCell align="left">{`RS-${row.price}`}</TableCell>
                   </TableRow>
                 );
               })}
@@ -405,3 +410,5 @@ export default function EnhancedTable() {
     </Box>
   );
 }
+
+ 
