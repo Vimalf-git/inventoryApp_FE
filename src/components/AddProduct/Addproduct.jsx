@@ -10,12 +10,24 @@ import TodayIcon from '@mui/icons-material/Today';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { jwtDecode } from 'jwt-decode';
+import useLogout from '../CustomHook/UseLogout';
 function Addproduct() {
     const [categories, setCategories] = useState([])
+    const logout=useLogout()
     const getCategory = async () => {
-        const res = await ApiService.get("/category/view")
+        try {
+            const res = await ApiService.get("/category/view")
         console.log(res.data.category);
         setCategories(res.data.category);
+        } catch (error) {
+            if (error.response.status === 400) {
+                toast.error(error.response.data.message)
+                logout()
+              }
+              else {
+                toast.error("Error Occoured! Please try after some time")
+              }
+        }
     }
     useEffect(() => {
         getCategory()
@@ -32,6 +44,7 @@ function Addproduct() {
     let year = today.getFullYear();
     console.log(today.getDate);
     const submitData = async (value) => {
+        // console.log(value.productCode);
         const token = sessionStorage.getItem('token');
         const email = jwtDecode(token).email
         try {
@@ -41,6 +54,7 @@ function Addproduct() {
                     productName: value.ProductName,
                     category: value.category,
                     price: value.price,
+                    ProductCode: value.ProductCode,
                     quantity: value.quantity
                 });
             if (res.status === 200) {
@@ -49,6 +63,8 @@ function Addproduct() {
             }
         } catch (error) {
             toast.error(error.response.data.message);
+            logout()
+
         }
     }
     const scheme = Yup.object().shape({

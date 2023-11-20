@@ -24,6 +24,11 @@ import { visuallyHidden } from '@mui/utils';
 import { tableProductData } from './TableDataContext';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ApiService from '../../common/ApiService';
+import { Button, TextField } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import Alert from '@mui/material/Alert';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 function createData(id, name, calories, fat, carbs, protein) {
   return {
     id,
@@ -99,6 +104,11 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
+    id: 'Sale',
+    numeric: false,
+    disablePadding: true,
+    label: 'Sale',
+  }, {
     id: 'ProductName',
     numeric: false,
     disablePadding: true,
@@ -127,6 +137,18 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Price',
+  },
+  {
+    id: 'Edit',
+    numeric: false,
+    disablePadding: false,
+    label: 'Edit',
+  },
+  {
+    id: 'Delete',
+    numeric: false,
+    disablePadding: false,
+    label: 'Delete',
   }
 ];
 
@@ -136,26 +158,27 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
+  const { rows = [] } = React.useContext(tableProductData);
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
+            // onClick={}
             inputProps={{
               'aria-label': 'select all desserts',
             }}
-          />
-        </TableCell>
+          /> */}
+        {/* </TableCell> */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            padding='normal'
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
@@ -188,7 +211,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-const{isFilter, setIsfilter}=React.useContext(tableProductData);
+  // const{isFilter, setIsfilter}=React.useContext(tableProductData);
   return (
     <Toolbar
       sx={{
@@ -200,7 +223,7 @@ const{isFilter, setIsfilter}=React.useContext(tableProductData);
         }),
       }}
     >
-      {numSelected > 0 ? (
+      {/* {numSelected > 0 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
           color="inherit"
@@ -209,31 +232,31 @@ const{isFilter, setIsfilter}=React.useContext(tableProductData);
         >
           {numSelected} selected
         </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Product List
-        </Typography>
-      )}
+      ) : ( */}
+      <Typography
+        sx={{ flex: '1 1 100%' }}
+        variant="h6"
+        id="tableTitle"
+        component="div"
+      >
+        Product List
+      </Typography>
+      {/* )} */}
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete" onClick={(id)=>{console.log(id +""+"ji");}}>
-          <IconButton>
+      {/* {numSelected > 0 ? (
+        <Tooltip title="Delete" onClick={(id) => { console.log(id + "" + "ji"); }}>
+          <IconButton >
             <DeleteIcon />
           </IconButton>
-          
+
         </Tooltip>
-      ) : ( 
-        <Tooltip title="Filter list" onClick={()=>setIsfilter(pre=>!pre)}>
-          <IconButton>
-            <FilterAltIcon  />
-          </IconButton>
-        </Tooltip>
-      )}
+      ) : <Tooltip title="Delete">
+        <IconButton disabled>
+          <DeleteIcon />
+        </IconButton>
+
+      </Tooltip>
+      } */}
     </Toolbar>
   );
 }
@@ -244,7 +267,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
 
-  const {rows=[]}=React.useContext(tableProductData);
+  const { rows = [], setRows, getProduct } = React.useContext(tableProductData);
   // console.log('table');
   // console.log(rows);
   const [order, setOrder] = React.useState('asc');
@@ -253,7 +276,7 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
- 
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -268,11 +291,15 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
+  const locArr = []
+  const handleClick = (event, id, dbId) => {
 
-  const handleClick = (event, id) => { 
-    
+    console.log(dbId);
     console.log(id);
-
+    locArr.push(id)
+    console.log(locArr);
+    console.log('---------');
+    // console.log(dbId);
     const selectedIndex = selected.indexOf(id);
     console.log(selected);
     let newSelected = [];
@@ -322,42 +349,107 @@ export default function EnhancedTable() {
   // React.useEffect(()=>{
   //   getProduct()
   // },[])
+  const delteProduct = async (index, customerId) => {
+    // console.log(index);
+    console.log(customerId);
+    const getRowsData = [...rows];
+    // console.log(getRowsData);
+    getRowsData.splice(index, 1);
+    // console.log(getRowsData);
+    setRows(getRowsData)
+
+    await ApiService.delete(`/deleteproduct/${customerId}`);
+    getProduct()
+  }
+  const [toggleAlert, setToggle] = React.useState(false)
+  const[qty,setQty]=React.useState(0);
+  const[curQty,setCurQty]=React.useState(0);
+  const [errorQty,setErrorQty]=React.useState("");
+  const[rowData,setRowData]=React.useState();
+  const saled=async()=>{
+    console.log(qty);
+    console.log(curQty);
+    try {
+      if(parseInt(qty)>0 && parseInt(qty)<=parseInt(curQty)){
+        console.log("enter");
+        setToggle(prev=>!prev);
+        setErrorQty("")
+        const token=sessionStorage.getItem('token');
+        const email=jwtDecode(token).email;
+        console.log(rowData.id);
+        const res=await ApiService.post('/saleslistadd',{
+          email:email,
+          productName:rowData.productName,
+          category:rowData.category,
+          quantity:rowData.quantity,
+          price:rowData.price
+        })
+        console.log(res);
+      }else{
+        setErrorQty("please sale based on your quantity")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const navigate=useNavigate();
   return (
-    <Box sx={{ width: '87%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-           {/* { visibleRows} */}
-            <TableBody>
-              {rows.map((row, index) => {
-                const isItemSelected = isSelected(row.id);
-                const labelId = `enhanced-table-checkbox-${index}`;
-                // console.log(row.checkboxId);
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.checkboxId)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.checkboxId}
-                    selected={isItemSelected}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <TableCell padding="checkbox">
+    <>
+    {
+       toggleAlert?
+      <Alert icon={false} sx={{
+        position: 'absolute', top:'5rem', zIndex: 1, display: 'flex',
+        justifyContent: 'center', alignItems: 'center', width: '25rem', height: '10rem'
+      }}> 
+      <TextField sx={{ m: 1, width: '85%' }} onChange={(e)=>{setQty(e.target.value)}}
+       / >
+        <Button variant='contained' sx={{display:'flex',m:'1rem'}}
+        
+        onClick={()=>saled()}
+        >saled</Button>
+
+        {errorQty?<Typography color={'red'}>{errorQty}</Typography>:""}
+      </Alert>
+      :<></>
+    }
+      
+        
+      <Box sx={{ width: '87%' }}>
+
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              {/* { visibleRows} */}
+              <TableBody>
+                {rows.map((row, index) => {
+                  const isItemSelected = isSelected(row.checkboxId);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+                  // console.log(row.checkboxId);
+                  return (
+                    <TableRow
+                      hover
+                      // onClick={(event) => handleClick(event, row.checkboxId, row.id)}
+                      role="checkbox"
+                      // aria-checked={isItemSelected}
+                      // tabIndex={-1}
+                      key={row.checkboxId}
+                      selected={isItemSelected}
+                      sx={{ cursor: 'pointer' }}
+                    >
+                      {/* <TableCell padding="checkbox">
                       <Checkbox
                         color="primary"
                         checked={isItemSelected}
@@ -365,50 +457,80 @@ export default function EnhancedTable() {
                           index
                         }}
                       />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.productName}
-                    </TableCell>
-                    <TableCell >{row.ProductCode}</TableCell>
-                    <TableCell >{row.category}</TableCell>
-                    <TableCell align="left">{row.quantity}</TableCell>
-                    <TableCell align="left">{`RS-${row.price}`}</TableCell>
+                    </TableCell> */}
+                      <TableCell>
+                        <Button variant='outlined' color='secondary'
+                          onClick={() => {
+                            setToggle(prev=>!prev),setCurQty(row.quantity),
+                            setRowData(row);
+                          }}
+                          disabled={row.quantity==0?true:false}
+                        >
+                          Sale</Button>
+                      </TableCell>
+
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="normal"
+                      >
+                        {row.productName}
+                      </TableCell>
+                      <TableCell >{row.ProductCode}</TableCell>
+                      <TableCell >{row.category}</TableCell>
+                      <TableCell align="left">{row.quantity}</TableCell>
+                      <TableCell align="left">{`RS-${row.price}`}</TableCell>
+                      <TableCell >
+                        <Button variant='contained' 
+                        onClick={()=>{navigate(`/editproduct/${row.id}`)}}
+                        ><span>
+                          <EditIcon />
+                        </span></Button>
+                      </TableCell>
+
+                      <TableCell>
+                        <Button variant='outlined' color='error'
+                          onClick={() => delteProduct(index, row.id)}
+                        >
+                          <span>
+                            <DeleteIcon />
+                          </span>
+                        </Button>
+                      </TableCell>
+
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
                   </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
         />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-    </Box>
+      </Box>
+    </>
+
   );
 }
 
- 

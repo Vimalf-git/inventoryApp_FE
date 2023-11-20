@@ -21,7 +21,7 @@ function Login() {
                 navigate('/dashboard')
             }
         } catch (error) {
-            console.log("hi");
+            // console.log("hi");
             toast.error(error.response.data.message || "Error Occoured! Please try after some time")
         }
 

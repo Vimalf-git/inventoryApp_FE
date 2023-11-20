@@ -62,16 +62,17 @@ function SideBar() {
             listName: "Sales",
             logo: <BarChartIcon />,
             path: '/saleschart'
-        }, {
-            listName: "Category",
-            logo: <BsFillGrid3X3GapFill />,
-            path: '/category'
         },
         {
             listName: "Sign Out",
             logo: <ExitToAppIcon />,
         }
     ]
+    // {
+    //     listName: "Category",
+    //     logo: <BsFillGrid3X3GapFill />,
+    //     path: '/category'
+    // },
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         setName(jwtDecode(token).username)
@@ -96,7 +97,7 @@ function SideBar() {
                         <div className='list-data' style={{ color: '#FFFF' }}>
                             <Button onClick={() => logout()} className='signbtn'>
                                 <span>{e.logo}</span>&nbsp;
-                                &nbsp;<spn className="sidebarListName">{e.listName}</spn>
+                                &nbsp;<span className="sidebarListName">{e.listName}</span>
                             </Button>
                         </div>
                         :

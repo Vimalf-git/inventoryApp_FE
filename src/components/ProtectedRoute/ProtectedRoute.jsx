@@ -9,7 +9,7 @@ if(!token){
     sessionStorage.clear();
     toast.error('Login then try to access')
 }
-  return token?children:<Navigate to='/'/>
+  return token?children:<Navigate to='/login'/>
 }
 
 export default ProtectedRoute

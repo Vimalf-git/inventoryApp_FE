@@ -5,15 +5,17 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import './Sales.css'
+import useLogout from '../CustomHook/UseLogout';
+import { toast } from 'react-toastify';
 function Sales() {
 
   const chartSetting = {
     yAxis: [
       {
-        label: 'rainfall (mm)',
+        label: 'Qty',
       },
     ],
-    width: 500,
+    width: 400,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
@@ -24,20 +26,36 @@ function Sales() {
 
   const valueFormatter = (value) => `${value}mm`;
   const [productChart, setProductChart] = useState([]);
-
+  const[cateChart,setCategoryChart]=useState([])
+  // const[monSale,setMonSale]=useState([])
   const token = sessionStorage.getItem('token');
   const email = jwtDecode(token).email;
+  const logout=useLogout();
   const getSalesData = async () => {
     try {
       const res = await ApiService.get(`/getsalelist/${email}`)
-      // const resDataFilter=res.data.data.electrical.map((e)=>{
-      //   const salesData =salesData+ e.salesData;
-      //   console.log(salesData);
-      // })
-      setProductChart(res.data.productChart)
-      console.log(res.data.data);
+      // console.log(res.data);
+      if(res.status==200){
+        setCategoryChart(res.data.categotyList)
+        setProductChart(res.data.productChart)
+        setMonSale(res.data.monDataList)
+      }
+     
+      // console.log(res.data.productChart);
     } catch (error) {
+      // console.log(error.response.status);
 
+      if(error.response.status === 400)
+      {
+        // console.log('jhgf');
+        toast.error(error.response.data.message)
+        logout()
+      }
+      else
+      {
+        toast.error("Error Occoured! Please try after some time")
+        logout()
+      }
     }
   }
   useEffect(() => {
@@ -65,6 +83,8 @@ function Sales() {
       seoul: 41,
       month: 'Mar',
     }]
+
+    
   const productData =
     productChart.map((e, i) => {
       return {
@@ -73,7 +93,20 @@ function Sales() {
         label: e.productName
       }
     })
-  console.log(productData);
+    const categotyData=cateChart.map((e,i)=>{
+      return{
+        id:i,
+        value:parseInt(e.quantity),
+        label:e.category
+      }
+    })
+  //   const monProductSale=monSale.map((e)=>{
+  //     return{
+  //       quantity:parseInt(e.quantity),
+  //       month:e.mon
+  //     }
+  //   })
+  // console.log(monProductSale);
   return (
     <div className='salesChart'>
       <div className='addproTittle'>
@@ -100,39 +133,35 @@ function Sales() {
           />
           {/* backgroundColor:'red'backgroundColor:'blue',, */}
         </div>
-        <div className='yearChart'>
+        {/* <div className='yearChart'>
           <h5 style={{ marginLeft: '2rem' }}>
-            product Sales
+            Month Sales
           </h5>
           <BarChart
-            dataset={dataset}
+            dataset={monProductSale}
             xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
             series={[
-              { dataKey: 'london', label: 'London', valueFormatter },
-              { dataKey: 'paris', label: 'Paris', valueFormatter },
-              { dataKey: 'newYork', label: 'New York', valueFormatter },
-              { dataKey: 'seoul', label: 'Seoul', valueFormatter },
+              { dataKey: 'quantity', label: 'quantity', valueFormatter },
             ]}
             {...chartSetting}
             sx={{ display: 'flex', alignItems: 'flex-start' }}
           />
-        </div>
+        </div> */}
       </div>
       <div className='bottomChart'>
         <div className='productChart'>
+        <h5 style={{ marginLeft: '2rem' }}>
+            Category Sales
+          </h5>
         <PieChart
           series={[
             {
-              data: [
-                { id: 0, value: 10, label: 'series A' },
-                { id: 1, value: 15, label: 'series B' },
-                { id: 2, value: 20, label: 'series C' },
-              ],
+              data: categotyData
             },
           ]}
-          width={400}
+          width={500}
           height={200}
-          sx={{ display: 'flex', justifyContent: 'center' }}
+          sx={{ display: 'flex', justifyContent: 'center', marginLeft: '-6rem' }}
         />
         </div>
       </div>

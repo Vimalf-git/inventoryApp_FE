@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import Addproduct from "./components/AddProduct/Addproduct"
 import TableContext from "./components/CustomHook/TableDataContext"
 import Sales from "./components/SalesChart/Sales"
+import EditProduct from "./components/EditProduct/EditProduct"
 function App() {
 
   return (
@@ -19,28 +20,46 @@ function App() {
           <Route path="/dashboard"
             element={
 
-              <ProtectedRoute>
                 <TableContext>
                   <div className="dash">
+                  <ProtectedRoute>
                     <SideBar /><Dashboard />
+                    </ProtectedRoute>
+
                   </div>
                 </TableContext>
 
-              </ProtectedRoute>
             } />
           <Route path="/addproduct" element={
-            <ProtectedRoute>
               <div className="dash">
+                            <ProtectedRoute>
+
                 <SideBar /><Addproduct />
+                </ProtectedRoute>
+
               </div>
-            </ProtectedRoute>
           } />
           <Route path="/saleschart" element={
             <div className="dash">
+            <ProtectedRoute>
+
               <SideBar />
               <Sales />
+              </ProtectedRoute>
+
             </div>
+
           } />
+          <Route path="/editproduct/:id" element={
+          //  <div className="dash">
+          //  <SideBar />
+          <ProtectedRoute>
+
+          <EditProduct/>
+          </ProtectedRoute>
+
+          // </div>
+        }/>
         </Routes>
       </BrowserRouter>
     </>
