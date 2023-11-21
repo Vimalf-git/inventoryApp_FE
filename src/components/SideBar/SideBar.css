@@ -72,18 +72,18 @@ a.active{
     background-color: red;
     right: 0;
 } */
-@media(max-width:2600px) {
+@media(min-width:2500px) {
     .list-data {
         width: 30rem;
     }
 }
-@media(max-width:1100px) {
+@media(max-width:1300px) {
     /* .sidebar {
                     background-color: red;
                     width: 20%;
     } */
     .list-data {
-        width: 93.9%;
+        width: 97.3%;
     }
 }
 @media(max-width:800px) {
