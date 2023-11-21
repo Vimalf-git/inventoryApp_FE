@@ -2,13 +2,10 @@
     width: 80%;
     height: 100dvh;
     display: flex;
-    /* flex-direction: column; */
     flex-wrap: wrap;
-    /* align-items: center; */
     justify-content: center;
     overflow-y: scroll;
-    /* gap: -10rem; */
-gap: 1rem;
+    gap: 1rem;
 }
 .addproTittle {
     margin-top: 2rem;
@@ -18,9 +15,7 @@ gap: 1rem;
     background-color: #d2e3f3;
     display: flex;
     align-items: center;
-    /* gap: 1rem; */
     justify-content: space-between;
-    /* background-color: green; */
 }
 
 .addproTittleDesign {
@@ -41,20 +36,15 @@ gap: 1rem;
 .TopChart{
     width: 90%;
     height: auto;
-    /* background-color: aqua; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* align-items: center; */
-    /* margin-top: -7rem; */
 }
 .bottomChart{
     width: 90%;
     height: auto;
-    /* background-color: aqua; */
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: flex-start !important; */
     align-items: flex-start;
 }
 .productChart{
@@ -63,9 +53,6 @@ gap: 1rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    
-    /* background-color: red !important; */
-
 }
 .yearChart{
     width: 28.3rem;
@@ -74,28 +61,7 @@ gap: 1rem;
     flex-wrap: wrap;
     flex-direction: column;
     
-    /* background-color: yellow !important; */
 }
-/* .productChart{
-    width: 50%;
-    height: 18rem;
-    background-color: red !important;
-    display: flex;
-    align-items: center;
-
-
-    flex-wrap: wrap;
-}
-*/
-/*
-.yearChart{
-    width: 50%;
-    height: 18rem;
-    background-color:greenyellow !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
 
 @media(max-width:320px) {
     .salesChart{
@@ -104,13 +70,4 @@ gap: 1rem;
     .addproTittle {
         height: 2rem !important;
     }
-    /* .addtittleBtn{
-        height: 0rem !important;
-        margin-left: .3rem !important;
-        margin-right: .4rem !important;
-        font-size: 10px !important;
-    }
-    .addTittleTxt{
-        font-size: 10px;
-    } */
 }

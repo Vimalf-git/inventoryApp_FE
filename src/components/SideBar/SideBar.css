@@ -2,24 +2,16 @@
     width: 20%;
     height: 100dvh;
     background-color: #2a2185;
-    /* background:linear-gradient(-40deg,#4481eb,#04befe); */
-    overflow-y: auto;
-                                                                                                                                                                                                                                             /* transition: all 0.5s; */
-
+    overflow-y: auto;                                                                                                                                                                                                                             
 }
 
 .menuList {
-    /* text-decoration: none; */
     width: 90%;
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     margin: 2.5rem 0 0 1rem;
-    /*justify-content: start; */
-    /* align-items: center; */
     gap: 2rem;
     color: #FFFF;
-    /* background-color: antiquewhite; */
 }
 
 .list-data {
@@ -65,30 +57,19 @@ a.active{
     color: #FFFF;
 }
 
-/* .box-style{
-    position: absolute;
-    height: 1rem;
-    width: 1rem;
-    background-color: red;
-    right: 0;
-} */
+
 @media(min-width:2500px) {
     .list-data {
         width: 30rem;
     }
 }
 @media(max-width:1300px) {
-    /* .sidebar {
-                    background-color: red;
-                    width: 20%;
-    } */
     .list-data {
         width: 97.3%;
     }
 }
 @media(max-width:800px) {
          .sidebar {
-            /* background-color: red; */
             width: 30%;
         }
         .avatarSection {
@@ -105,10 +86,7 @@ a.active{
 }
 
 @media(max-width:500px) {
-    /* .sidebar {
-        width: calc(700px - 150%);
-    } */
-
+  
     .menuList {
         position: relative;
         left: -1.5rem;
@@ -127,31 +105,3 @@ a.active{
         width: 110%;
     }
 }
-/* @media(min-width:425px) {
-
-    .dash{
-        background-color: aqua;
-        width: 425px;
-        height: 100dvh;
-    }
-
-} */
-/* @media(max-width:400px) {
-    .menuList {
-        position: relative;
-        left: -1.5rem;
-    }
-    .sidebarListName{
-        display: none;
-    }
-    .avatarSection {
-        margin: 2rem 0 0 1rem;
-
-    }
-    .list-data-con{
-        display: none;
-    }
-    .list-data {
-        width: 100%;
-    }
-} */

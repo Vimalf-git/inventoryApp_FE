@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './SideBar.css'
-import {
-    BsGrid1X2Fill, BsFillArchiveFill,
-    BsFillGrid3X3GapFill
-} from 'react-icons/bs'
+import { BsGrid1X2Fill } from 'react-icons/bs'
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import Avatar from '@mui/material/Avatar';
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode';
-import { deepPurple,deepOrange } from '@mui/material/colors';
+import { deepOrange } from '@mui/material/colors';
 import { Button } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import UseLogout from '../CustomHook/UseLogout'
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import Stack from '@mui/material/Stack';
 import BarChartIcon from '@mui/icons-material/BarChart';
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -68,17 +64,11 @@ function SideBar() {
             logo: <ExitToAppIcon />,
         }
     ]
-    // {
-    //     listName: "Category",
-    //     logo: <BsFillGrid3X3GapFill />,
-    //     path: '/category'
-    // },
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         setName(jwtDecode(token).username)
-        // console.log(jwtDecode(token).username);
     }, [])
-    
+
     return (
         <div className='sidebar'>
             <div className='avatarSection'>
@@ -102,8 +92,8 @@ function SideBar() {
                         </div>
                         :
                         <NavLink key={i} className='list-data' to={e.path}
-                            style={{ color: '#FFFF', textDecoration: 'none'}}>
-                            <span 
+                            style={{ color: '#FFFF', textDecoration: 'none' }}>
+                            <span
                                 style={{ marginLeft: '1rem', }}>
                                 {e.logo}&nbsp; &nbsp;
                                 <span className='list-data-con'>

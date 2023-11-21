@@ -19,9 +19,7 @@ function Signup() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     const submitData = async (value) => {
-        console.log("enter into FE");
         try {
             const res = await ApiService.post('/usercreate', value);
             if (res.status === 201) {
@@ -36,7 +34,6 @@ function Signup() {
             }
         }
     }
-
     const scheme = Yup.object().shape({
         username: Yup.string().required('please enter your name').min(3, '* User Name should be atlest 3 characters'),
         email: Yup.string().required('please enter your mail'),
@@ -69,7 +66,6 @@ function Signup() {
                             password: ''
                         }}
                         onSubmit={(value) => {
-                            console.log("hi");
                             submitData(value)
                         }}
                         validationSchema={scheme}

@@ -9,25 +9,6 @@
     width: 100%;
 }
 
-
-/* @media(min-width:425px) {
-
-    .dash{
-        background-color: aqua;
-        width: 425px;
-        height: 100dvh;
-    }
-
-} */
- /* @media(min-width:375px) {
-
-    .dash{
-        width: 375px;
-        height: 100dvh;
-    }
-
-}  */
-
 @media(max-width:320px) {
 
     .dash{

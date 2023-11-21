@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './AddProduct.css'
@@ -8,25 +8,24 @@ import { toast } from 'react-toastify'
 import ApiService from '../../common/ApiService';
 import TodayIcon from '@mui/icons-material/Today';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { jwtDecode } from 'jwt-decode';
 import useLogout from '../CustomHook/UseLogout';
 function Addproduct() {
     const [categories, setCategories] = useState([])
-    const logout=useLogout()
+    const logout = useLogout()
     const getCategory = async () => {
         try {
             const res = await ApiService.get("/category/view")
-        console.log(res.data.category);
-        setCategories(res.data.category);
+            console.log(res.data.category);
+            setCategories(res.data.category);
         } catch (error) {
             if (error.response.status === 400) {
                 toast.error(error.response.data.message)
                 logout()
-              }
-              else {
+            }
+            else {
                 toast.error("Error Occoured! Please try after some time")
-              }
+            }
         }
     }
     useEffect(() => {
@@ -44,7 +43,6 @@ function Addproduct() {
     let year = today.getFullYear();
     console.log(today.getDate);
     const submitData = async (value) => {
-        // console.log(value.productCode);
         const token = sessionStorage.getItem('token');
         const email = jwtDecode(token).email
         try {
@@ -94,7 +92,7 @@ function Addproduct() {
                             price: '',
                             quantity: '',
                             category: '',
-                            ProductCode:''
+                            ProductCode: ''
                         }}
                         onSubmit={(value) => {
                             console.log(value);
@@ -113,7 +111,6 @@ function Addproduct() {
 
                                     >Category</InputLabel>
                                     <Select
-                                        // sx={{width:'12ch'}}
                                         labelId="demo-simple-select-required-label"
                                         id="demo-simple-select-required"
                                         value={values.category}
@@ -137,7 +134,6 @@ function Addproduct() {
                                         <FormHelperText>{errors.category}</FormHelperText>
                                         : ""}
                                 </FormControl>
-                                {/* <div> */}
                                 <TextField sx={{ m: 1, width: '80%' }}
                                     required id="outlined-basic" label="ProductName" variant="outlined"
                                     value={values.ProductName} name='ProductName' onChange={handleChange}
@@ -150,9 +146,6 @@ function Addproduct() {
                                     onBlur={handleBlur} error={errors.ProductCode && touched.ProductCode}
                                     helperText={errors.ProductCode && touched.ProductCode ? errors.ProductCode : ""}
                                 />
-                                {/* </div>                          */}
-                                {/* <TextareaAutosize /> */}
-
                             </div>
                             <div className='addproForm-right'>
 

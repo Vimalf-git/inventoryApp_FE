@@ -12,12 +12,7 @@
 .designPart{
     width: 50%;
     height: 100dvh;
-    /* background-color: #FA8072; */
     background:linear-gradient(-40deg,#4481eb,#04befe);
-    /* border-bottom-right-radius:500px; */
-    /* border-top-right-radius:50px; */
-    /* position: relative; */
-    /* top: -40px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +28,6 @@
     justify-content: center;
     align-items:center ;
     gap: 2rem;
-    /* background-color: aqua; */
  
 }
 @media(max-width:600px){
@@ -68,19 +62,8 @@
         display:flex;
         justify-content: center;
         align-items: center;
-        /* background-color: red !important; */
-        /* position: relative; */
-        /* left: -1rem; */
-        /* border-bottom-right-radius:220px; */
-        /* border-bottom-left-radius:20px; */
-
-
      }    
      .loginlefttxt{
-        /* display:flex;
-        justify-content: center;
-        align-items: center; */
-        /* position: static; */
         left: 2rem;
      }
     .loginForm{

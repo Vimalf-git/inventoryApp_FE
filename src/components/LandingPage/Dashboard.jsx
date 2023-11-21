@@ -11,10 +11,6 @@ import useLogout from '../CustomHook/UseLogout';
 import { toast } from 'react-toastify';
 
 function Dashboard() {
-  /* orange-FF9F43
-blue-00CFE8
-dblue-1B2850
-green-28C76F */
   const [totalProduct, settotalProduct] = useState(0)
   const [allCategory, setallCategory] = useState(0)
   const [outOfStock, setoutOfStock] = useState(0)
@@ -22,15 +18,12 @@ green-28C76F */
   const logout = useLogout()
 
   const getCardList = async () => {
-    // console.log('jkhgfdfghjk');
     try {
-      // console.log("dsh");
       const token = sessionStorage.getItem('token')
       const email = jwtDecode(token).email
       const res = await ApiService.get(`/cardlist/${email}`)
       console.log(res);
       if (res.status == 200) {
-        // console.log("dfghdsfgb");
         const size = res.data.products;
         const CategoryLen = res.data.allCategories
         const outOfStock = res.data.outOfStock
@@ -38,13 +31,8 @@ green-28C76F */
         setoutOfStock(outOfStock.length)
         setallCategory(CategoryLen.length)
         settotalProduct(size.length);
-        // console.log(outOfStock);
       }
-      // if(res.status==400){
-      //   console.log('jhgf');
-      // }
     } catch (error) {
-      // console.log('entering');
       if (error.response.status === 400) {
         toast.error(error.response.data.message)
         logout()
@@ -56,9 +44,9 @@ green-28C76F */
     }
 
   }
-  useEffect(()=>{
+  useEffect(() => {
     getCardList()
-  },[])
+  }, [])
 
   const statusCard = [
     {

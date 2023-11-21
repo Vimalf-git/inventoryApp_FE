@@ -2,13 +2,10 @@
     width: 80%;
     height: 100vh;
     display: flex;
-    /* flex-wrap: wrap; */
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     overflow-y: scroll;
     gap: 3rem;
-    /* background-color: blue; */
 }
 
 .addproTittle {
@@ -19,9 +16,7 @@
     background-color: #d2e3f3;
     display: flex;
     align-items: center;
-    /* gap: 1rem; */
     justify-content: space-between;
-    /* background-color: green; */
 }
 
 .addproTittleDesign {
@@ -60,23 +55,17 @@
 
 .addproForm {
     width: 90%;
-    /* height: 20rem; */
-    /* height: 100vh; */
     height: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    /* align-items: center; */
-    /* background-color: black; */
-    /* background-color: brown; */
+    
 
 }
 
 .addproForm-left {
     width: 26rem;
-    /* height: 20rem; */
-    /* background-color: red; */
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -86,22 +75,14 @@
 
 .addproForm-right {
     width: 26rem;
-    /* height: 20rem; */
-
-    /* background-color: aqua; */
-    /* height: auto; */
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    /* justify-content: flex-start; */
     align-items: center;
 }
 
 @media(max-width:320px) {
-    .addproForm-left {
-        /* background-color: aquamarine; */
-    }
-
+   
     .addproTittle {
         height: 50rem !important;
     }
@@ -115,17 +96,3 @@
         font-size: 10px;
     }
 }
-@media(max-width:800px) {
-    .addProduct {
-        /* width: 70%; */
-    }
-}
-/* @media(min-width:425px) {
-
-    .addProduct{
-        background-color: aqua;
-        width: 500px;
-        height: 100dvh;
-    }
-
-} */

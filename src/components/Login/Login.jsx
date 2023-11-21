@@ -21,7 +21,6 @@ function Login() {
                 navigate('/dashboard')
             }
         } catch (error) {
-            // console.log("hi");
             toast.error(error.response.data.message || "Error Occoured! Please try after some time")
         }
 
@@ -38,20 +37,14 @@ function Login() {
                     <Typography variant='h5' component="p"
                         sx={{ color: "#ffff" }}>
                         New Here?</Typography>
-                    {/* <Typography variant='h5' component="p" className='loginlefttxt'
-                        sx={{ color: "#ffff" ,display:'flex',alignItems:'center'
-                        ,justifyContent:'center'
-                        }}>
-                        Create your account and get started...
-                    </Typography> */}
                     <Button variant='contained' color='warning' style={{ cursor: 'pointer' }}
                         onClick={(e) => toggleSign(e)}>Sigh Up</Button>
                 </div>
                 <div className='loginForm'>
                     <Typography variant='h5' component="p"
                         sx={{ color: "#4481eb" }}>
-                        Login                   
-                         </Typography>
+                        Login
+                    </Typography>
                     <form >
                         <div className="form-floating login-box mb-3">
                             <TextField required id="outlined-basic" label="Email" variant="outlined"
@@ -65,12 +58,12 @@ function Login() {
                             />
                         </div>
                         <div className='for-crt-link mb-3'>
-                            <Link style={{ textDecoration: 'none', color:'#4481eb' }} to='/forget'>Forget password?</Link>
+                            <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/forget'>Forget password?</Link>
                         </div>
                         <div className="d-grid">
                             <Button variant='contained' color='primary'
                                 onClick={(e) => loginVerify(e)} sx={{ backgroundColor: "#4481eb" }}
-                                >
+                            >
                                 Sign in
                             </Button>
                         </div>

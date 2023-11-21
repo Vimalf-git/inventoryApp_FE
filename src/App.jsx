@@ -22,46 +22,34 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard"
             element={
-
               <TableContext>
                 <div className="dash">
                   <ProtectedRoute>
                     <SideBar /><Dashboard />
                   </ProtectedRoute>
-
                 </div>
               </TableContext>
-
             } />
           <Route path="/addproduct" element={
             <div className="dash">
               <ProtectedRoute>
-
                 <SideBar /><Addproduct />
               </ProtectedRoute>
-
             </div>
           } />
           <Route path="/saleschart" element={
             <div className="dash">
               <ProtectedRoute>
-
                 <SideBar />
                 <Sales />
               </ProtectedRoute>
-
             </div>
 
           } />
           <Route path="/editproduct/:id" element={
-            //  <div className="dash">
-            //  <SideBar />
             <ProtectedRoute>
-
               <EditProduct />
             </ProtectedRoute>
-
-            // </div>
           } />
           <Route path="/forget" element={
             <UserDetails>

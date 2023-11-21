@@ -13,94 +13,17 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { tableProductData } from './TableDataContext';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ApiService from '../../common/ApiService';
 import { Button, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import Alert from '@mui/material/Alert';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-function createData(id, name, calories, fat, carbs, protein) {
-  return {
-    id,
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
-
-
-
-
-// const getProduct=async()=>{
-//   console.log("ji vankam");
-//  const res=await ApiService.get('/getproduct')
-//  if(res.status==200){
-//   console.log(res.data.data);
-//   setRows(res.data.data);
-//  }
-// }
-// React.useEffect(()=>{
-//   getProduct()
-// },[])
-// const rows = [
-//   createData(1, 'Cupcake', 305, 3.7, 67, 4.3),
-//   createData(2, 'Donut', 452, 25.0, 51, 4.9),
-//   createData(3, 'Eclair', 262, 16.0, 24, 6.0),
-//   createData(4, 'Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData(5, 'Gingerbread', 356, 16.0, 49, 3.9),
-//   createData(6, 'Honeycomb', 408, 3.2, 87, 6.5),
-//   createData(7, 'Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData(8, 'Jelly Bean', 375, 0.0, 94, 0.0),
-//   createData(9, 'KitKat', 518, 26.0, 65, 7.0),
-//   createData(10, 'Lollipop', 392, 0.2, 98, 0.0),
-//   createData(11, 'Marshmallow', 318, 0, 81, 2.0),
-//   createData(12, 'Nougat', 360, 19.0, 9, 37.0),
-//   createData(13, 'Oreo', 437, 18.0, 63, 4.0),
-// ];
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
 
 const headCells = [
   {
@@ -153,27 +76,15 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-  const { rows = [] } = React.useContext(tableProductData);
   return (
     <TableHead>
       <TableRow>
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            // onClick={}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          /> */}
-        {/* </TableCell> */}
+
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -211,7 +122,6 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-  // const{isFilter, setIsfilter}=React.useContext(tableProductData);
   return (
     <Toolbar
       sx={{
@@ -223,16 +133,6 @@ function EnhancedTableToolbar(props) {
         }),
       }}
     >
-      {/* {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : ( */}
       <Typography
         sx={{ flex: '1 1 100%' }}
         variant="h6"
@@ -241,22 +141,6 @@ function EnhancedTableToolbar(props) {
       >
         Product List
       </Typography>
-      {/* )} */}
-
-      {/* {numSelected > 0 ? (
-        <Tooltip title="Delete" onClick={(id) => { console.log(id + "" + "ji"); }}>
-          <IconButton >
-            <DeleteIcon />
-          </IconButton>
-
-        </Tooltip>
-      ) : <Tooltip title="Delete">
-        <IconButton disabled>
-          <DeleteIcon />
-        </IconButton>
-
-      </Tooltip>
-      } */}
     </Toolbar>
   );
 }
@@ -268,8 +152,6 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable() {
 
   const { rows = [], setRows, getProduct } = React.useContext(tableProductData);
-  // console.log('table');
-  // console.log(rows);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -285,38 +167,11 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.checkboxId);//change
+      const newSelected = rows.map((n) => n.checkboxId);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
-  };
-  const locArr = []
-  const handleClick = (event, id, dbId) => {
-
-    console.log(dbId);
-    console.log(id);
-    locArr.push(id)
-    console.log(locArr);
-    console.log('---------');
-    // console.log(dbId);
-    const selectedIndex = selected.indexOf(id);
-    console.log(selected);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -334,103 +189,66 @@ export default function EnhancedTable() {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-  // const visibleRows = React.useMemo(
-  //   () =>
-  //     stableSort(rows, getComparator(order, orderBy)).slice(
-  //       page * rowsPerPage,
-  //       page * rowsPerPage + rowsPerPage,
-  //     ),
-  //   [order, orderBy, page, rowsPerPage],
-  // );
-  // React.useEffect(()=>{
-  //   getProduct()
-  // },[])
   const delteProduct = async (index, customerId) => {
-    // console.log(index);
     console.log(customerId);
     const getRowsData = [...rows];
-    // console.log(getRowsData);
     getRowsData.splice(index, 1);
-    // console.log(getRowsData);
     setRows(getRowsData)
-
     await ApiService.delete(`/deleteproduct/${customerId}`);
     getProduct()
   }
   const [toggleAlert, setToggle] = React.useState(false)
-  const[qty,setQty]=React.useState(0);
-  const[curQty,setCurQty]=React.useState(0);
-  const [errorQty,setErrorQty]=React.useState("");
-  const[rowData,setRowData]=React.useState();
-  // const[rowIndex,setRowIndex]=React.useState(0)
-  const saled=async()=>{
-    console.log(qty);
-    console.log(curQty);
+  const [qty, setQty] = React.useState(0);
+  const [curQty, setCurQty] = React.useState(0);
+  const [errorQty, setErrorQty] = React.useState("");
+  const [rowData, setRowData] = React.useState();
+  const saled = async () => {
     try {
-      if(parseInt(qty)>0 && parseInt(qty)<=parseInt(curQty)){
-        const token=sessionStorage.getItem('token');
-        const email=jwtDecode(token).email;
-        // console.log(rowData.id);
-        // const redQty=curQty-qty;
-        // const updateData=[...rows]
-        // updateData.splice(rowIndex,1,{
-        //   // id:rowData.id,
-        //   // email:email,
-        //   productName:rowData.productName,
-        //   pr
-        //   category:rowData.category,
-        //   quantity:redQty,
-        //   price:rowData.price
-        // })
-        // console.log(updateData);
-        // setRowData(updateData)
+      if (parseInt(qty) > 0 && parseInt(qty) <= parseInt(curQty)) {
+        const token = sessionStorage.getItem('token');
+        const email = jwtDecode(token).email;
         console.log("enter");
-        setToggle(prev=>!prev);
+        setToggle(prev => !prev);
         setErrorQty("")
-        
-        const res=await ApiService.post('/saleslistadd',{
-          id:rowData.id,
-          email:email,
-          productName:rowData.productName,
-          category:rowData.category,
-          quantity:qty,
-          price:rowData.price
+
+        const res = await ApiService.post('/saleslistadd', {
+          id: rowData.id,
+          email: email,
+          productName: rowData.productName,
+          category: rowData.category,
+          quantity: qty,
+          price: rowData.price
         })
-        console.log(res);
         getProduct()
-      }else{
+      } else {
         setErrorQty("please sale based on your quantity")
       }
     } catch (error) {
       console.log(error);
     }
   }
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
     <>
-    {
-       toggleAlert?
-      <Alert icon={false} sx={{
-        position: 'absolute', top:'5rem', zIndex: 1, display: 'flex',
-        justifyContent: 'center', alignItems: 'center', width: '25rem', height: '10rem'
-      }}> 
-      <TextField sx={{ m: 1, width: '85%' }} onChange={(e)=>{setQty(e.target.value)}}
-       / >
-        <Button variant='contained' sx={{display:'flex',m:'1rem'}}
-        
-        onClick={()=>saled()}
-        >saled</Button>
+      {
+        toggleAlert ?
+          <Alert icon={false} sx={{
+            position: 'absolute', top: '5rem', zIndex: 1, display: 'flex',
+            justifyContent: 'center', alignItems: 'center', width: '25rem', height: '10rem'
+          }}>
+            <TextField sx={{ m: 1, width: '85%' }} onChange={(e) => { setQty(e.target.value) }}
+            />
+            <Button variant='contained' sx={{ display: 'flex', m: '1rem' }}
 
-        {errorQty?<Typography color={'red'}>{errorQty}</Typography>:""}
-      </Alert>
-      :<></>
-    }
-      
-        
+              onClick={() => saled()}
+            >saled</Button>
+
+            {errorQty ? <Typography color={'red'}>{errorQty}</Typography> : ""}
+          </Alert>
+          : <></>
+      }
       <Box sx={{ width: '87%' }}>
 
         <Paper sx={{ width: '100%', mb: 2 }}>
@@ -449,40 +267,25 @@ export default function EnhancedTable() {
                 onRequestSort={handleRequestSort}
                 rowCount={rows.length}
               />
-              {/* { visibleRows} */}
               <TableBody>
                 {rows.map((row, index) => {
                   const isItemSelected = isSelected(row.checkboxId);
                   const labelId = `enhanced-table-checkbox-${index}`;
-                  // console.log(row.checkboxId);
                   return (
                     <TableRow
                       hover
-                      // onClick={(event) => handleClick(event, row.checkboxId, row.id)}
                       role="checkbox"
-                      // aria-checked={isItemSelected}
-                      // tabIndex={-1}
                       key={row.checkboxId}
                       selected={isItemSelected}
                       sx={{ cursor: 'pointer' }}
                     >
-                      {/* <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          index
-                        }}
-                      />
-                    </TableCell> */}
                       <TableCell>
                         <Button variant='outlined' color='secondary'
                           onClick={() => {
-                            setToggle(prev=>!prev),setCurQty(row.quantity),
-                            setRowData(row)
-                            // setRowIndex(index);
+                            setToggle(prev => !prev), setCurQty(row.quantity),
+                              setRowData(row)
                           }}
-                          disabled={row.quantity==0?true:false}
+                          disabled={row.quantity == 0 ? true : false}
                         >
                           Sale</Button>
                       </TableCell>
@@ -500,11 +303,11 @@ export default function EnhancedTable() {
                       <TableCell align="left">{row.quantity}</TableCell>
                       <TableCell align="left">{`RS-${row.price}`}</TableCell>
                       <TableCell >
-                        <Button variant='contained' 
-                        onClick={()=>{navigate(`/editproduct/${row.id}`)}}
+                        <Button variant='contained'
+                          onClick={() => { navigate(`/editproduct/${row.id}`) }}
                         ><span>
-                          <EditIcon />
-                        </span></Button>
+                            <EditIcon />
+                          </span></Button>
                       </TableCell>
 
                       <TableCell>
