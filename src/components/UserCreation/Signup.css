@@ -12,7 +12,7 @@
     flex-wrap: wrap;
 }
 .designSignupPart{
-    width: 50%;
+    width: 30%;
     height: 100dvh;
     background:linear-gradient(-40deg,#4481eb,#04befe);
     display: flex;
@@ -22,7 +22,7 @@
     gap: 2rem;
 }
 .signupForm{
-    width: 50%;
+    width: 70%;
     height: 100vh;
     display: flex;
     flex-direction: column;
