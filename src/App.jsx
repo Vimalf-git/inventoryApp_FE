@@ -8,6 +8,9 @@ import Addproduct from "./components/AddProduct/Addproduct"
 import TableContext from "./components/CustomHook/TableDataContext"
 import Sales from "./components/SalesChart/Sales"
 import EditProduct from "./components/EditProduct/EditProduct"
+import Forget from "./components/Forget/Forget"
+import ResetPassword from "./components/Forget/ResetPassword"
+import UserDetails from "./components/Forget/UserDetailContext"
 function App() {
 
   return (
@@ -20,46 +23,58 @@ function App() {
           <Route path="/dashboard"
             element={
 
-                <TableContext>
-                  <div className="dash">
+              <TableContext>
+                <div className="dash">
                   <ProtectedRoute>
                     <SideBar /><Dashboard />
-                    </ProtectedRoute>
+                  </ProtectedRoute>
 
-                  </div>
-                </TableContext>
+                </div>
+              </TableContext>
 
             } />
           <Route path="/addproduct" element={
-              <div className="dash">
-                            <ProtectedRoute>
+            <div className="dash">
+              <ProtectedRoute>
 
                 <SideBar /><Addproduct />
-                </ProtectedRoute>
+              </ProtectedRoute>
 
-              </div>
+            </div>
           } />
           <Route path="/saleschart" element={
             <div className="dash">
-            <ProtectedRoute>
+              <ProtectedRoute>
 
-              <SideBar />
-              <Sales />
+                <SideBar />
+                <Sales />
               </ProtectedRoute>
 
             </div>
 
           } />
           <Route path="/editproduct/:id" element={
-          //  <div className="dash">
-          //  <SideBar />
-          <ProtectedRoute>
+            //  <div className="dash">
+            //  <SideBar />
+            <ProtectedRoute>
 
-          <EditProduct/>
-          </ProtectedRoute>
+              <EditProduct />
+            </ProtectedRoute>
 
-          // </div>
-        }/>
+            // </div>
+          } />
+          <Route path="/forget" element={
+            <UserDetails>
+              <Forget />
+            </UserDetails>
+          }></Route>
+
+          <Route path='/resetpassword/*' element={
+            <UserDetails>
+              <ResetPassword />
+            </UserDetails>
+
+          } />
         </Routes>
       </BrowserRouter>
     </>

@@ -46,7 +46,7 @@ function Signup() {
     return (
         <>
             <div className='signupPage'>
-                <div className='designSignupPart'>
+            <div className='designSignupPart'>
                     <Typography variant='h5' component="p"
                         sx={{ color: "#ffff" }}>
                         Already Have an account?</Typography>
@@ -123,6 +123,7 @@ function Signup() {
                     )}
                     </Formik>
                 </div>
+               
             </div>
         </>
     )

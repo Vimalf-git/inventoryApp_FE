@@ -34,14 +34,16 @@ function Login() {
     return (
         <>
             <div className='loginPage'>
-                <div className='designPart'>
+                <div className='designPart' >
                     <Typography variant='h5' component="p"
                         sx={{ color: "#ffff" }}>
                         New Here?</Typography>
-                    <Typography variant='h5' component="p"
-                        sx={{ color: "#ffff" }}>
+                    {/* <Typography variant='h5' component="p" className='loginlefttxt'
+                        sx={{ color: "#ffff" ,display:'flex',alignItems:'center'
+                        ,justifyContent:'center'
+                        }}>
                         Create your account and get started...
-                    </Typography>
+                    </Typography> */}
                     <Button variant='contained' color='warning' style={{ cursor: 'pointer' }}
                         onClick={(e) => toggleSign(e)}>Sigh Up</Button>
                 </div>

@@ -5,19 +5,19 @@
 }
 .loginPage{
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-wrap: wrap;
 }
 .designPart{
     width: 50%;
-    height: 37.7rem;
+    height: 100dvh;
     /* background-color: #FA8072; */
     background:linear-gradient(-40deg,#4481eb,#04befe);
-    border-bottom-right-radius:500px;
-    border-top-right-radius:50px;
-    position: relative;
-    top: -40px;
+    /* border-bottom-right-radius:500px; */
+    /* border-top-right-radius:50px; */
+    /* position: relative; */
+    /* top: -40px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,27 +36,58 @@
     /* background-color: aqua; */
  
 }
-
+@media(max-width:600px){
+    .loginPage{
+        width: 600px;
+        
+    }
+    .loginForm{
+        width: 600px;
+        display: flex;
+        position: relative;
+        top: -5rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .designPart{
+        width: 600px;
+        height: 12rem;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 @media(max-width:400px){
     .loginPage{
         width: 400px;
         
     }
     .designPart{
-        width: 400px;
-        height: 20rem;
+        width: 420px;
+        height: 12rem;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: red !important; */
         /* position: relative; */
         /* left: -1rem; */
-        border-bottom-right-radius:220px;
+        /* border-bottom-right-radius:220px; */
         /* border-bottom-left-radius:20px; */
 
 
-    }    
+     }    
+     .loginlefttxt{
+        /* display:flex;
+        justify-content: center;
+        align-items: center; */
+        /* position: static; */
+        left: 2rem;
+     }
     .loginForm{
         width: 400px;
         display: flex;
         position: relative;
-        top: -8rem;
+        top: -5rem;
         justify-content: center;
         align-items: center;
     }

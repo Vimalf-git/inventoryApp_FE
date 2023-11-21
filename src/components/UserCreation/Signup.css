@@ -7,20 +7,20 @@
 
 .signupPage{
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-wrap: wrap;
 }
 .designSignupPart{
     width: 50%;
-    height: 37.7rem;
+    height: 100dvh;
     /* background-color: #FA8072; */
     background:linear-gradient(-40deg,#4481eb,#04befe);
-    border-bottom-left-radius:5000px;
-    border-top-left-radius:50px;
-    position: relative;
+    /* border-bottom-left-radius:5000px; */
+    /* border-top-left-radius:50px; */
+    /* position: relative;
     top: -40px;
-    right: -50%;
+    right: -50%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,8 +30,8 @@
 .signupForm{
     width: 50%;
     height: 100vh;
-    position: relative;
-    left: -50%;
+    /* position: relative; */
+    /* left: -50%; */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -46,6 +46,27 @@
     justify-content: center;
     align-items: center;
 }
+@media(max-width:600px){
+    .signupPage{
+        width: 600px;
+        
+    }
+    .designSignupPart{
+        width: 600px;
+        height: 14rem;
+        position: relative;
+        top: 0%;
+    }
+    .signupForm{
+        width: 600px;
+        position: relative;
+        bottom: 0rem;
+        /* left: -0%; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 @media(max-width:400px){
     .signupPage{
         width: 400px;
@@ -53,11 +74,11 @@
     }
     .designSignupPart{
         width: 600px;
-        height: 20rem;
+        height: 14rem;
         position: relative;
-        left: -0%;
+        top: 0%;
         /* left: -1rem; */
-        border-bottom-right-radius:220px;
+        /* border-bottom-right-radius:220px; */
         /* border-bottom-left-radius:20px; */
 
 
@@ -65,8 +86,8 @@
     .signupForm{
         width: 400px;
         position: relative;
-        top: -8rem;
-        left: -0%;
+        bottom: 0rem;
+        /* left: -0%; */
         display: flex;
         justify-content: center;
         align-items: center;

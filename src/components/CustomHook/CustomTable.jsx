@@ -366,25 +366,42 @@ export default function EnhancedTable() {
   const[curQty,setCurQty]=React.useState(0);
   const [errorQty,setErrorQty]=React.useState("");
   const[rowData,setRowData]=React.useState();
+  // const[rowIndex,setRowIndex]=React.useState(0)
   const saled=async()=>{
     console.log(qty);
     console.log(curQty);
     try {
       if(parseInt(qty)>0 && parseInt(qty)<=parseInt(curQty)){
+        const token=sessionStorage.getItem('token');
+        const email=jwtDecode(token).email;
+        // console.log(rowData.id);
+        // const redQty=curQty-qty;
+        // const updateData=[...rows]
+        // updateData.splice(rowIndex,1,{
+        //   // id:rowData.id,
+        //   // email:email,
+        //   productName:rowData.productName,
+        //   pr
+        //   category:rowData.category,
+        //   quantity:redQty,
+        //   price:rowData.price
+        // })
+        // console.log(updateData);
+        // setRowData(updateData)
         console.log("enter");
         setToggle(prev=>!prev);
         setErrorQty("")
-        const token=sessionStorage.getItem('token');
-        const email=jwtDecode(token).email;
-        console.log(rowData.id);
+        
         const res=await ApiService.post('/saleslistadd',{
+          id:rowData.id,
           email:email,
           productName:rowData.productName,
           category:rowData.category,
-          quantity:rowData.quantity,
+          quantity:qty,
           price:rowData.price
         })
         console.log(res);
+        getProduct()
       }else{
         setErrorQty("please sale based on your quantity")
       }
@@ -462,7 +479,8 @@ export default function EnhancedTable() {
                         <Button variant='outlined' color='secondary'
                           onClick={() => {
                             setToggle(prev=>!prev),setCurQty(row.quantity),
-                            setRowData(row);
+                            setRowData(row)
+                            // setRowIndex(index);
                           }}
                           disabled={row.quantity==0?true:false}
                         >
