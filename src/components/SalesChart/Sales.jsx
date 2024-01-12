@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import ApiService from '../../common/ApiService'
 import { jwtDecode } from 'jwt-decode';
-import { PieChart } from '@mui/x-charts/PieChart';
 import './Sales.css'
 import useLogout from '../CustomHook/UseLogout';
 import { toast } from 'react-toastify';
+import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 function Sales() {
   const [productChart, setProductChart] = useState([]);
-  const [cateChart, setCategoryChart] = useState([])
   const token = sessionStorage.getItem('token');
   const email = jwtDecode(token).email;
   const logout = useLogout();
@@ -15,9 +15,7 @@ function Sales() {
     try {
       const res = await ApiService.get(`/getsalelist/${email}`)
       if (res.status == 200) {
-        setCategoryChart(res.data.categotyList)
-        setProductChart(res.data.productChart)
-        setMonSale(res.data.monDataList)
+        setProductChart(res.data.resData)
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -34,21 +32,44 @@ function Sales() {
     getSalesData();
   }, [])
 
-  const productData =
-    productChart.map((e, i) => {
-      return {
-        id: i,
-        value: parseInt(e.quantity),
-        label: e.productName
+  Chart.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip, Legend
+  )
+  const options = {
+    responsive: true,
+    Plugins: {
+      legend: {
+        position: 'top'
+      },
+      title: {
+        display: true,
+        text: 'Total Product Sale'
       }
+    }
+  }
+
+  let monArr = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+  const productDataSam = productChart.map((e) => {
+    let resArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    monArr.filter((v, i) => {
+      if (e.saleMon == v)
+        resArr[i] = e.quantity
     })
-  const categotyData = cateChart.map((e, i) => {
     return {
-      id: i,
-      value: parseInt(e.quantity),
-      label: e.category
+      label: e.productName,
+      data: resArr,
+      backgroundColor: 'rgb(255,99,132,.5)'
     }
   })
+
+  const data = {
+    labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
+    datasets: productDataSam
+  }
   return (
     <div className='salesChart'>
       <div className='addproTittle'>
@@ -58,39 +79,14 @@ function Sales() {
         </div>
       </div>
       <div className='TopChart'>
-        <div className='productChart'>
+        <div className='TopproductChart'>
           <h5 style={{ marginLeft: '2rem' }}>
             product Sales
           </h5>
-          <PieChart
-            series={[
-              {
-                data: productData
-              },
-            ]}
-            width={500}
-            height={200}
-            sx={{ display: 'flex', justifyContent: 'center', marginLeft: '-6rem' }}
-          />
+          <Bar options={options} data={data} />
         </div>
       </div>
-      <div className='bottomChart'>
-        <div className='productChart'>
-          <h5 style={{ marginLeft: '2rem' }}>
-            Category Sales
-          </h5>
-          <PieChart
-            series={[
-              {
-                data: categotyData
-              },
-            ]}
-            width={500}
-            height={200}
-            sx={{ display: 'flex', justifyContent: 'center', marginLeft: '-6rem' }}
-          />
-        </div>
-      </div>
+
     </div>
   )
 }

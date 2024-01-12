@@ -15,8 +15,7 @@ function Dashboard() {
   const [allCategory, setallCategory] = useState(0)
   const [outOfStock, setoutOfStock] = useState(0)
   const [storeValue, setstoreValue] = useState(0)
-  const logout = useLogout()
-
+  const logout = useLogout() 
   const getCardList = async () => {
     try {
       const token = sessionStorage.getItem('token')

@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import ApiService from '../../common/ApiService';
 import './Login.css';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 function Login() {
     const [email, setMail] = useState("")
     const [password, setPassword] = useState("");
@@ -30,6 +31,11 @@ function Login() {
         console.log('enter into');
         navigate('/signup')
     }
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     return (
         <>
             <div className='loginPage'>
@@ -46,15 +52,31 @@ function Login() {
                         Login
                     </Typography>
                     <form >
-                        <div className="form-floating login-box mb-3">
-                            <TextField required id="outlined-basic" label="Email" variant="outlined"
+                        <div className="form-floating login-box  mb-3" >
+                            <TextField required id="outlined-basic" label="Email" variant="outlined" sx={{width:'15em'}}
                                 onChange={(e) => setMail(e.target.value)}
                             />
                         </div>
                         <div className="form-floating  mb-3">
 
                             <TextField required id="outlined-basic" label="Password" variant="outlined"
+                            sx={{width:'15em'}}
                                 onChange={(e) => setPassword(e.target.value)}
+                                type={showPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment:
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                }}
+
                             />
                         </div>
                         <div className='for-crt-link mb-3'>
