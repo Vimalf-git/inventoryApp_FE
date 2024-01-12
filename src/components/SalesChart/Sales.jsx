@@ -68,7 +68,7 @@ function Sales() {
 
   const data = {
     labels: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-    datasets: productDataSam
+    datasets: productDataSam&&productDataSam
   }
   return (
     <div className='salesChart'>
