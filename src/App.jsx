@@ -25,7 +25,7 @@ function App() {
               <TableContext>
                 <div className="dash">
                   <ProtectedRoute>
-                    <SideBar /><Dashboard />
+                    <SideBar/><Dashboard />
                   </ProtectedRoute>
                 </div>
               </TableContext>
