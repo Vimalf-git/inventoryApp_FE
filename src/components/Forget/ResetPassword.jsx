@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import ApiService from '../../common/ApiService';
-import { UserDetailContext } from './UserDetailContext';
-import SaveAsIcon from '@mui/icons-material/SaveAs';
-import './ForgetPass.css'
-import { Button, TextField, Typography } from '@mui/material';
-
+// import ApiService from '../../Common/ApiService';
+import resetPassImg from '../../assets/resetImg.svg'
+import { Button, TextField } from '@mui/material';
+import {PublishedWithChanges } from '@mui/icons-material';
+import './ResetPassword.css'
+import ApiService from '../../Common/ApiService';
 function ResetPassword() {
     const navigate = useNavigate();
-    const { mail, setMail, pass, setPass } = useContext(UserDetailContext)
-
+    const [mail, setMail] = useState("");
+    const [pass, setPass] = useState("");
     const [searchParam, setSearchparam] = useSearchParams();
     const token = searchParam.get('emailtoken');
     const id = searchParam.get('id');
@@ -18,59 +18,64 @@ function ResetPassword() {
 
         try {
             let res = await ApiService.get(`forgetpass/getres/${id}/${token}`)
-            console.log(res.data);
-            setMail(res.data.mail)
+            if (res.status === 200) {
+                setMail(res.data.mail)
+                toast.success("verified");
+            } else {
+                toast.error("invalid token")
+            }
         } catch (error) {
             toast.error(error.response.data.message)
         }
-
     }
     useEffect(() => {
         getData();
     }, [])
     const changePassword = async (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         try {
             const res = await ApiService.post('/forgetpass/updatepassword', {
                 email: mail,
                 password: pass
             })
             if (res.status === 200) {
-                toast.success('Password changed');
                 setPass(" ")
                 navigate('/')
+                toast.success('Password changed');
             }
         } catch (error) {
             if (error.response.data.status === 400) {
+                navigate('/forget')
                 toast.error('Invalid user')
             } else {
+                navigate('/forget')
                 toast.error(error.response.data.message);
             }
         }
     }
     return (<>
-        <div className='reset-form ' >
-            <Typography
-                component='h4'
-                color={'#ffff'}
-                sx={{
-                    bgcolor: '#4481eb', width: '10rem', display: 'flex',
-                    borderRadius: '.2rem', justifyContent: 'center', height: '3rem', alignItems: 'center'
-                }}
-            >
-                Reset Password
-            </Typography>
-            <TextField sx={{ m: 1, width: '15rem' }}
-                required id="outlined-basic" label="New password" variant="outlined"
-                value={pass} name='password' onChange={(e) => setPass(e.target.value)}
-            />
-            <Button onClick={(e) => changePassword(e)}
-                variant='contained'
-                color='warning'
-            >
-                send &nbsp;
-                <SaveAsIcon />
-            </Button>
+        <div className='resetPass'>
+            {/* */}
+            <div className='resetPass-l'>
+                <img className='resetPassImg' src={resetPassImg}/>
+            </div>
+            <div className='resetPass-r'>
+                <h1>
+                    Reset Password
+                </h1>
+                <TextField sx={{ m: 1, width: '15rem' }}
+                    required id="outlined-basic" label="Password" variant="outlined"
+                    value={pass} name='pass' onChange={(e) => setPass(e.target.value)}
+                />
+                <Button onClick={() => { changePassword() }}
+                    variant='contained'
+                // color=''
+                >
+                    Change &nbsp;<PublishedWithChanges />
+                    {/* <SendIcon /> */}
+                </Button>
+            </div>
+
         </div>
     </>
     )

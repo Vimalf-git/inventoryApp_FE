@@ -10,17 +10,17 @@
     flex-wrap: wrap;
 }
 .designPart{
-    width: 30%;
+    width: 35%;
     height: 100dvh;
-    background:linear-gradient(-40deg,#4481eb,#04befe);
+    /* background:linear-gradient(-40deg,#4481eb,#04befe); */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    /* gap: 2rem; */
 }
 .loginForm{
-    width: 70%;
+    width: 65%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -29,6 +29,10 @@
     align-items:center ;
     gap: 2rem;
  
+}
+.for-crt-link {
+    display: flex;
+    justify-content: space-between;
 }
 @media(max-width:600px){
     .loginPage{
@@ -44,35 +48,65 @@
         align-items: center;
     }
     .designPart{
-        width: 600px;
+        display: none;
+        /* width: 600px;
         height: 12rem;
         display:flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; */
     }
 }
-@media(max-width:400px){
+@media(max-width:426px){
     .loginPage{
-        width: 400px;
+        width: 426px;
         
     }
     .designPart{
-        width: 420px;
+        display: none;
+        /* width: 420px;
         height: 12rem;
         display:flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; */
      }    
      .loginlefttxt{
         left: 2rem;
      }
     .loginForm{
-        width: 400px;
+        width: 426px;
         display: flex;
         position: relative;
         top: -5rem;
         justify-content: center;
         align-items: center;
+    }
+}
+@media(max-width:321px){
+    .loginPage{
+        width: 320px;
+        
+    }
+    .designPart{
+        display: none;
+        /* width: 420px;
+        height: 12rem;
+        display:flex;
+        justify-content: center;
+        align-items: center; */
+     }    
+     .loginlefttxt{
+        left: 2rem;
+     }
+    .loginForm{
+        width: 320px;
+        display: flex;
+        position: relative;
+        /* top: -5rem; */
+        justify-content: center;
+        align-items: center;
+    }
+    .txtWFeild{
+        width: 17em !important;
     }
 }
 

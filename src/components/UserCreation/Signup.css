@@ -12,17 +12,17 @@
     flex-wrap: wrap;
 }
 .designSignupPart{
-    width: 30%;
+    width: 35%;
     height: 100dvh;
-    background:linear-gradient(-40deg,#4481eb,#04befe);
+    /* background:linear-gradient(-40deg,#4481eb,#04befe); */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    /* gap: 2rem; */
 }
 .signupForm{
-    width: 70%;
+    width: 65%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -42,10 +42,11 @@
         
     }
     .designSignupPart{
-        width: 600px;
+        display: none;
+        /* width: 600px;
         height: 14rem;
         position: relative;
-        top: 0%;
+        top: 0%; */
     }
     .signupForm{
         width: 600px;
@@ -56,19 +57,20 @@
         align-items: center;
     }
 }
-@media(max-width:400px){
+@media(max-width:426px){
     .signupPage{
-        width: 400px;
+        width: 426px;
         
     }
     .designSignupPart{
-        width: 600px;
+        display: none;
+        /* width: 600px;
         height: 14rem;
         position: relative;
-        top: 0%;
+        top: 0%; */
     }    
     .signupForm{
-        width: 400px;
+        width: 426px;
         position: relative;
         bottom: 0rem;
         display: flex;
@@ -77,3 +79,63 @@
     }
 }
 
+@media(max-width:321px){
+    .signupPage{
+        width: 321px;
+        
+    }
+    .designSignupPart{
+        display: none;
+        /* width: 600px;
+        height: 14rem;
+        position: relative;
+        top: 0%; */
+    }    
+    .signupForm{
+        width: 321px;
+        position: relative;
+        bottom: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media(min-width:2559px){
+    .signupPage{
+        width: 2559px;
+        
+    }
+    .designSignupPart{
+        width: 35%;
+        /* height: 14rem; */
+        position: relative;
+        top: 0%;
+    }    
+    .signupForm{
+        width: 65%;
+        /* position: relative; */
+        /* bottom: 0rem; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3em;
+        /* background-color: aqua; */
+    }
+    .signWxlV{
+        /* width: 50em; */
+        /* height: 5em; */
+        font-size: 6em !important;
+        /* background-color: red; */
+        /* display: flex; */
+        /* justify-content: center; */
+    }
+    .inputWxlV{
+        width: 40em !important;
+        height: 4em;
+    }
+    .form-input{
+        display: flex;
+        gap: 3em;
+    }
+}

@@ -1,13 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { toast } from 'react-toastify';
-import ApiService from '../../common/ApiService';
-import { UserDetailContext } from './UserDetailContext';
-import { Button, TextField, Typography } from '@mui/material';
+// import ApiService from '../../common/ApiService';
+// import { UserDetailContext } from './UserDetailContext';
+import { Button, TextField } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import './ForgetPass.css'
-function Forget() {
+import ForgetPassImg from '../../assets/9712739_4140043.svg'
+import { ForwardToInbox } from '@mui/icons-material';
+import ApiService from '../../Common/ApiService';
+function ForgetPass() {
 
-    const { mail, setMail } = useContext(UserDetailContext)
+    // const { mail, setMail } = useContext(UserDetailContext)
+    const [mail, setMail] = useState("");
     const mailSend = async () => {
         try {
             if (mail !== "") {
@@ -28,32 +32,28 @@ function Forget() {
     }
     return (
         <>
-            <div className='reset-form'>
-                <Typography
-                    component='h4'
-                    color={'#ffff'}
-                    sx={{
-                        bgcolor: '#4481eb', width: '10rem', display: 'flex',
-                        borderRadius: '.2rem', justifyContent: 'center', height: '3rem', alignItems: 'center'
-                    }}
-                >
+            <div className='forgetPass'>
+                <div className='forgetPass-l'> 
+                <img className='forPassImg' src={ForgetPassImg}/>
+                </div>
+                <div className='forgetPass-r'>
+                <h1>
                     Forget Password
-                </Typography>
-                <TextField sx={{ m: 1, width: '15rem' }}
-                    required id="outlined-basic" label="Mail" variant="outlined"
-                    value={mail} name='Mail' onChange={(e) => setMail(e.target.value)}
-                />
-                <Button onClick={() => mailSend()}
-                    variant='contained'
-                    color='warning'
-                >
-                    send &nbsp;
-                    <SendIcon />
-                </Button>
+                </h1>
+                     <TextField sx={{ m: 1, width: '15rem' }}
+                        required id="outlined-basic" label="Mail" variant="outlined"
+                        value={mail} name='Mail' onChange={(e) => setMail(e.target.value)}
+                    />
+                    <Button onClick={() => {mailSend()}}
+                        variant='contained'
+                    >
+                        send &nbsp;<ForwardToInbox/>
+                    </Button> 
+                </div>
             </div>
 
         </>
     )
 }
 
-export default Forget
+export default ForgetPass
