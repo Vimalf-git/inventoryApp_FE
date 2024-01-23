@@ -1,16 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import { toast } from 'react-toastify';
-// import ApiService from '../../common/ApiService';
-// import { UserDetailContext } from './UserDetailContext';
 import { Button, TextField } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
 import './ForgetPass.css'
 import ForgetPassImg from '../../assets/9712739_4140043.svg'
 import { ForwardToInbox } from '@mui/icons-material';
 import ApiService from '../../Common/ApiService';
 function ForgetPass() {
 
-    // const { mail, setMail } = useContext(UserDetailContext)
     const [mail, setMail] = useState("");
     const mailSend = async () => {
         try {
