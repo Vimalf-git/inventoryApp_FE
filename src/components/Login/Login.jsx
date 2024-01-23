@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
-// import ApiService from '../../common/ApiService';
 import './Login.css';
 import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import ApiService from '../../Common/ApiService';
 import invenImg from '../../assets/login/inventoryLogin.svg'
+import ApiService from '../../Common/ApiService';
 function Login() {
     const [email, setMail] = useState("")
     const [password, setPassword] = useState("");
@@ -44,7 +43,6 @@ function Login() {
             <div className='designPart'>
                      <Typography className='scribblename' variant='h5' component="p">
                     Inventory App</Typography>
-                    {/*<Button variant='contained' color='warning' onClick={(e) =>toggleSign(e)}>Sign Up</Button> */}
                     <img src={invenImg} className="scribbleImg"/>
                 </div>
                 <div className='loginForm'>
