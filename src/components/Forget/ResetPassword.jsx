@@ -5,7 +5,7 @@ import resetPassImg from '../../assets/resetImg.svg'
 import { Button, TextField } from '@mui/material';
 import {PublishedWithChanges } from '@mui/icons-material';
 import './ResetPassword.css'
-import ApiService from '../../Common/ApiService';
+import ApiService from '../../Utiles/ApiService';
 function ResetPassword() {
     const navigate = useNavigate();
     const [mail, setMail] = useState("");

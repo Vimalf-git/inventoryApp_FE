@@ -4,7 +4,7 @@ import { Button, TextField } from '@mui/material';
 import './ForgetPass.css'
 import ForgetPassImg from '../../assets/9712739_4140043.svg'
 import { ForwardToInbox } from '@mui/icons-material';
-import ApiService from '../../Common/ApiService';
+import ApiService from '../../Utiles/ApiService';
 function ForgetPass() {
 
     const [mail, setMail] = useState("");

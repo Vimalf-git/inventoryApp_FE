@@ -5,7 +5,7 @@ import './Login.css';
 import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import invenImg from '../../assets/login/inventoryLogin.svg'
-import ApiService from '../../Common/ApiService';
+import ApiService from '../../Utiles/ApiService';
 function Login() {
     const [email, setMail] = useState("")
     const [password, setPassword] = useState("");

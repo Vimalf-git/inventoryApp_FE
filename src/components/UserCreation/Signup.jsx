@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import signm1 from '../../assets/sign/signm1.svg'
-import ApiService from '../../Common/ApiService';
+import ApiService from '../../Utiles/ApiService';
 function Signup() {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
