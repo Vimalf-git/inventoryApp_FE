@@ -5,11 +5,11 @@ import './AddProduct.css'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
-import ApiService from '../../common/ApiService';
 import TodayIcon from '@mui/icons-material/Today';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { jwtDecode } from 'jwt-decode';
 import useLogout from '../CustomHook/UseLogout';
+import ApiService from '../../Utiles/ApiService';
 function Addproduct() {
     const [categories, setCategories] = useState([])
     const logout = useLogout()

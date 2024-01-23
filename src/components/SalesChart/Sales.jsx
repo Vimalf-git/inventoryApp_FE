@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import ApiService from '../../common/ApiService'
 import { jwtDecode } from 'jwt-decode';
 import './Sales.css'
 import useLogout from '../CustomHook/UseLogout';
 import { toast } from 'react-toastify';
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import ApiService from '../../Utiles/ApiService';
 function Sales() {
   const [productChart, setProductChart] = useState([]);
   const token = sessionStorage.getItem('token');

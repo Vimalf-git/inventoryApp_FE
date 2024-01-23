@@ -5,8 +5,8 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import SaveAsIcon from '@mui/icons-material/SaveAs';
-import ApiService from '../../common/ApiService';
 import useLogout from '../CustomHook/UseLogout';
+import ApiService from '../../Utiles/ApiService';
 function EditProduct() {
     const logout = useLogout();
     const [initialValues, setInitialValues] = useState(

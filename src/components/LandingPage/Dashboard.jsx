@@ -4,11 +4,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import CategoryIcon from '@mui/icons-material/Category';
-import ApiService from '../../common/ApiService';
 import { jwtDecode } from 'jwt-decode';
 import EnhancedTable from '../CustomHook/CustomTable';
 import useLogout from '../CustomHook/UseLogout';
 import { toast } from 'react-toastify';
+import ApiService from '../../Utiles/ApiService';
 
 function Dashboard() {
   const [totalProduct, settotalProduct] = useState(0)

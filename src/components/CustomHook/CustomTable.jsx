@@ -18,12 +18,12 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 import { tableProductData } from './TableDataContext';
-import ApiService from '../../common/ApiService';
 import { Button, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import Alert from '@mui/material/Alert';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import ApiService from '../../Utiles/ApiService';
 
 const headCells = [
   {
