@@ -5,6 +5,7 @@ import './ForgetPass.css'
 import ForgetPassImg from '../../assets/9712739_4140043.svg'
 import { ForwardToInbox } from '@mui/icons-material';
 import ApiService from '../../Utiles/ApiService';
+import { Link } from 'react-router-dom';
 function ForgetPass() {
 
     const [mail, setMail] = useState("");
@@ -34,13 +35,17 @@ function ForgetPass() {
                 </div>
                 <div className='forgetPass-r'>
                 <h1>
-                    Forget Password
+                    Forgot Password
                 </h1>
                      <TextField sx={{ m: 1, width: '15rem' }}
                         required id="outlined-basic" label="Mail" variant="outlined"
                         value={mail} name='Mail' onChange={(e) => setMail(e.target.value)}
                     />
+                    <div className='forMSign mb-3'>
+                                <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/login'> Back to Login?</Link>
+                            </div>
                     <Button onClick={() => {mailSend()}}
+                    className='forsendbtn'
                         variant='contained'
                     >
                         send &nbsp;<ForwardToInbox/>

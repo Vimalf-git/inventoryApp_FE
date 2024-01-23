@@ -22,6 +22,14 @@
     align-items: center;
     gap: .3rem;
 }
+.forMSign{
+    width: 15rem;
+    display: flex;
+    justify-content: flex-start;
+}
+.forsendbtn{
+    width: 15rem;
+}
 @media(max-width:769px){
     .forgetPass-l{
         width: 769px;
