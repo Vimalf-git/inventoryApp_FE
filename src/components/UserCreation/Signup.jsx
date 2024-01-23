@@ -5,18 +5,16 @@ import './Signup.css'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
-// import ApiService from '../../common/ApiService';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import ApiService from '../../Common/ApiService';
 import signm1 from '../../assets/sign/signm1.svg'
-// import signm2 from '../../assets/sign/signm2.jpg'
+import ApiService from '../../Common/ApiService';
 function Signup() {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const toggleLogin = () => {
-        navigate('/login');
-    }
+    // const toggleLogin = () => {
+    //     navigate('/login');
+    // }
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -47,22 +45,13 @@ function Signup() {
         <>
             <div className='signupPage'>
                 <div className='designSignupPart'>
-                    {/* <Typography variant='h5' component="p"
-                        sx={{ color: "#ffff" }}>
-                        Already Have an account?</Typography>
-                    <Typography variant='h5' component="p"
-                        sx={{ color: "#ffff" }}>
-                        please login...
-                    </Typography>
-                    <
-                    <Button variant='contained' color='warning' onClick={() => toggleLogin()}>Sigh In</Button> */}
-                    <img src={signm1}/>
+                    <img src={signm1} />
                 </div>
                 <div className='signupForm'>
                     <Typography variant='h5' component="p"
                         sx={{ color: "#4481eb" }} className='signWxlV'>
                         Create Account
-                        
+
                     </Typography>
                     <Formik
                         initialValues={{
@@ -74,12 +63,12 @@ function Signup() {
                         onSubmit={(value) => {
                             submitData(value)
                         }}
-                        
+
                         validationSchema={scheme}
                     >{({ handleSubmit, handleChange, handleBlur, errors, touched, values }) => (
                         <  form onSubmit={handleSubmit} className='form-input' >
                             <TextField sx={{ m: 1, width: '35ch' }}
-                            className='inputWxlV'
+                                className='inputWxlV'
                                 required id="outlined-basic" label="Name" variant="outlined"
                                 value={values.username} name='username' onChange={handleChange}
                                 onBlur={handleBlur} error={errors.username && touched.username}
@@ -87,21 +76,21 @@ function Signup() {
                             />
 
                             <TextField sx={{ m: 1, width: '35ch' }}
-                            className='inputWxlV'
+                                className='inputWxlV'
                                 required id="outlined-basic" label="Email" variant="outlined"
                                 value={values.email} name='email' onChange={handleChange}
                                 onBlur={handleBlur} error={errors.email && touched.email}
                                 helperText={errors.email && touched.email ? errors.email : ""} />
 
                             <TextField sx={{ m: 1, width: '35ch' }}
-                            className='inputWxlV'
+                                className='inputWxlV'
                                 required id="outlined-basic" label="contactNo" variant="outlined"
                                 value={values.contact} name='contact' onChange={handleChange}
                                 onBlur={handleBlur} error={errors.contact && touched.contact}
                                 helperText={errors.contact && touched.contact ? errors.contact : ""} />
 
                             <TextField sx={{ m: 1, width: '35ch' }}
-                            className='inputWxlV'
+                                className='inputWxlV'
                                 required id="outlined-basic" label="password" variant="outlined"
                                 value={values.password} name='password' onChange={handleChange}
                                 onBlur={handleBlur} error={errors.password && touched.password}
@@ -125,7 +114,7 @@ function Signup() {
                                 <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/login'>Already a Member?</Link>
                             </div>
                             <Button sx={{ m: 1, width: '35ch' }}
-className='inputWxlV'
+                                className='inputWxlV'
                                 variant='contained' color='primary' type='submit'  >
                                 Sign Up
                             </Button>
