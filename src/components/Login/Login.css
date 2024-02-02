@@ -43,7 +43,7 @@
         width: 600px;
         display: flex;
         position: relative;
-        top: -5rem;
+        top: .2rem;
         justify-content: center;
         align-items: center;
     }
@@ -76,7 +76,7 @@
         width: 426px;
         display: flex;
         position: relative;
-        top: -5rem;
+        top: .2rem;
         justify-content: center;
         align-items: center;
     }
@@ -84,7 +84,11 @@
 @media(max-width:321px){
     .loginPage{
         width: 320px;
-        
+        height: 100vh;
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .designPart{
         display: none;
@@ -99,9 +103,11 @@
      }
     .loginForm{
         width: 320px;
+        /* background-color: aqua; */
+        /* height: 100vh; */
         display: flex;
         position: relative;
-        /* top: -5rem; */
+        top: .2rem;
         justify-content: center;
         align-items: center;
     }

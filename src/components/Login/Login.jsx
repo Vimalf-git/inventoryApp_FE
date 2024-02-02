@@ -79,6 +79,11 @@ function Login() {
 
                             />
                         </div>
+                        <div>
+                                <p>Use this for demo⬇️</p>
+                                <p>E-mail:-selvamvimaldz@gmail.com</p>
+                                <p>Password:-vimal</p>
+                            </div>
                         <div className='for-crt-link mb-3'>
                             <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/forget'>Forget password?</Link>
                             <Link style={{ textDecoration: 'none', color: '#4481eb' }} to='/signup'>New to Here?</Link>
